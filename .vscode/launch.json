@@ -2,6 +2,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "CodeLens (Launch) - Labirinto",
+            "request": "launch",
+            "mainClass": "Labirinto",
+            "projectName": "ProjetointegradoC_17b72737"
+        },
+        {
+            "type": "java",
             "name": "CodeLens (Launch) - Programa",
             "request": "launch",
             "mainClass": "Programa"

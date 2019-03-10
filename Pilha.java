@@ -1,60 +1,64 @@
-public class Pilha {
-	private Object[] pilha; // vetor de objetos
-	private int topo; // indicador de topo
+public class Pilha <Coordenada>
+{
+    private Object[] vetor;
+    private int ultimo;
 
-	// construtor
-	public Pilha(int qtde) {
-		//indica que está vazia, pois o topo é a primeira posição
-		this.topo = 0;
-		//criando uma pilha com a quantidade de posições informada
-		this.pilha = new Object[qtde];
-	}
-	
-	// push
-	public boolean empilhar(Object valor) {
-		if (!this.pilhaCheia()) {
-			this.pilha[this.topo] = valor;
-			this.topo++;
-			return true;
-		}
-		return false;
-	}
-	
-	// pop
-	public Object desempilhar() {
-		if (this.pilhaVazia()) {
-			return null;
-		}
-		this.topo--;
-		return this.pilha[this.topo];
-	}
+    public Pilha (int tamanho) throws Exception
+    {
+        if (tamanho<1)
+            throw new Exception ("Tamanho invalido");
 
-	// isEmpty
-	public boolean pilhaVazia() {
-		if (this.topo == 0) {
-			return true;
-		}
-		return false;
-	}
-	
-	// isFull
-	public boolean pilhaCheia() {
-		if (this.topo > this.pilha.length - 1) {
-			return true;
-		}
-		return false;
-	}
+        this.ultimo = -1;
+        this.vetor  = new Object [tamanho];
+    }
 
-	// peek
-	public Object exibeTopo() {
-		if (this.pilhaVazia()) {
-			return null;
-		}
-		return this.pilha[this.topo - 1];
-	}
-	
-	// size
-	public int quantosElementos() {
-		return this.topo;
-	}
+    // push
+    public void guarde (Coordenada valor) throws Exception
+    {
+        if (valor==null)
+            throw new Exception ("Valor ausente");
+
+        if (this.ultimo==this.vetor.length-1)
+            throw new Exception ("Nao cabe mais");
+
+        this.ultimo++;
+        this.vetor[this.ultimo] = valor;
+    }
+
+    // pop
+    public void jogueForaValor () throws Exception
+    {
+        if (this.ultimo==-1)
+            throw new Exception ("Nada guardado");
+
+        this.vetor[this.ultimo] = null;
+        this.ultimo--;
+    }
+
+    // peek
+    public Coordenada getValor () throws Exception
+    {
+        if (this.ultimo==-1)
+            throw new Exception ("Nada guardado");
+
+        return (Coordenada)this.vetor[this.ultimo];
+    }
+
+    // isEmpty
+    public boolean isVazia ()
+    {
+        return this.ultimo==-1;
+    }
+
+    // isFull
+    public boolean isCheia ()
+    {
+        return this.ultimo==this.vetor.length-1;
+    }
+
+    // size
+    public int getQuantos ()
+    {
+        return this.ultimo+1;
+    }     
 }
