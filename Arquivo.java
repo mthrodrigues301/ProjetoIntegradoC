@@ -3,7 +3,7 @@ import java.io.FileReader;
 
 public class Arquivo{
 
-    private int qtdLinhas = 0, qtdPrimeiraColuna = 0, qtdColunas = 0;
+    private int qtdTotalLinhas = 0, qtdLinhas = 0, qtdPrimeiraColuna = 0, qtdColunas = 0;
     private String caminho;
     private BufferedReader ArquivoGerado;
     private boolean entrada, saida;
@@ -17,8 +17,12 @@ public class Arquivo{
     }
 
     
+    public void setQtdTotalLinhas(int qtdTotalLinhas){
+        this.qtdTotalLinhas = qtdTotalLinhas;
+    }
+
     public void setQtdLinhas(int qtdLinhas){
-        this.qtdLinhas = qtdLinhas;
+        this.qtdLinhas += qtdLinhas ;
     }
 
     public void setQtdPrimeiraColuna(int qtdPrimeiraColuna){
@@ -27,6 +31,10 @@ public class Arquivo{
 
     public String getCaminho(){
         return this.caminho;
+    }
+    
+    public int getQtdTotalLinhas(){
+        return this.qtdTotalLinhas;
     }
 
     public int getQtdLinhas(){
@@ -70,9 +78,11 @@ public class Arquivo{
     {
         String str;
         int count = 2;
-        this.setQtdLinhas(Integer.parseInt(arquivo.readLine()));
+        int countLinhas = 1;
+        this.setQtdTotalLinhas(Integer.parseInt(arquivo.readLine()));
 
         this.setQtdPrimeiraColuna(arquivo.readLine().length());
+        this.setQtdLinhas(1);
 
         while((str = arquivo.readLine()) != null){
             if(isValidColunas(str.length()) && str.contains("#"))
@@ -86,9 +96,12 @@ public class Arquivo{
             if(str.contains("S") || str.contains("s"))
                 this.saida = true;    
             
+            this.setQtdLinhas(1);    
             count ++;
-          }
-
+          }   
+          
+        if(!this.isValidLinhas())
+            throw new Exception("Arquivo invalido! Linhas do labirinto nao coincidem com o total.");
         arquivo.close();
     }
 
@@ -101,6 +114,13 @@ public class Arquivo{
 
     public boolean isValidLabirinto(){
         if(entrada == true && saida == true)
+            return true;
+        
+        return false;
+    }
+
+    public boolean isValidLinhas(){
+        if(this.qtdTotalLinhas == this.qtdLinhas)
             return true;
         
         return false;
