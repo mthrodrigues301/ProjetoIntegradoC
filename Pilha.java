@@ -1,4 +1,4 @@
-public class Pilha <Coordenada>
+public class Pilha <X>
 {
     private Object[] vetor;
     private int ultimo;
@@ -13,7 +13,7 @@ public class Pilha <Coordenada>
     }
 
     // push
-    public void guarde (Coordenada valor) throws Exception
+    public void guarde (X valor) throws Exception
     {
         if (valor==null)
             throw new Exception ("Valor ausente");
@@ -36,12 +36,12 @@ public class Pilha <Coordenada>
     }
 
     // peek
-    public Coordenada getValor () throws Exception
+    public X getValor () throws Exception
     {
         if (this.ultimo==-1)
             throw new Exception ("Nada guardado");
 
-        return (Coordenada)this.vetor[this.ultimo];
+        return (X)this.vetor[this.ultimo];
     }
 
     // isEmpty
