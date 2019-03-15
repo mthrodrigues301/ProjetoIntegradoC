@@ -1,5 +1,7 @@
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.util.regex.Matcher; 
+import java.util.regex.Pattern;
 
 public class Arquivo{
 
@@ -8,6 +10,7 @@ public class Arquivo{
     private BufferedReader ArquivoGerado;
     private boolean entrada, saida;
     private String linhaAtual;
+    private String regex = "[+-]?[0-9][0-9]*";
 
     public void setCaminho(String caminho) throws Exception
     {
@@ -17,8 +20,14 @@ public class Arquivo{
         this.caminho = caminho;
     }
     
-    public void setQtdTotalLinhas(int qtdTotalLinhas){
-        this.qtdTotalLinhas = qtdTotalLinhas;
+    public void setQtdTotalLinhas(String qtdTotalLinhas)throws Exception{
+        Pattern p = Pattern.compile(regex); 
+        Matcher m = p.matcher(qtdTotalLinhas);
+
+        if(!(m.find() && m.group().equals(qtdTotalLinhas)))
+            throw new Exception("Entrada invalida!");
+
+        this.qtdTotalLinhas = Integer.parseInt(qtdTotalLinhas);
     }
 
     public void setQtdLinhas(int qtdLinhas){
@@ -76,7 +85,12 @@ public class Arquivo{
 
     public void carregarArquivo(BufferedReader arquivo) throws Exception
     {
-        this.setQtdTotalLinhas(Integer.parseInt(arquivo.readLine()));
+        try{
+            this.setQtdTotalLinhas(arquivo.readLine());
+        }
+        catch(Exception ex){
+            throw new Exception("A quantidade de linhas deve ser um valor inteiro!");
+        }
         
         this.linhaAtual = arquivo.readLine();
         if(isValidLinhas() == true){
@@ -97,10 +111,11 @@ public class Arquivo{
                 this.saida = true;    
             
             this.setQtdLinhas(1);
-          }   
+        }   
           
         if(!this.isValidQtdLinhas())
             throw new Exception("Arquivo invalido! Linhas do labirinto nao coincidem com o total.");
+        
         arquivo.close();
     }
 

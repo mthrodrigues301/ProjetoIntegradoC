@@ -13,7 +13,7 @@ public class Labirinto {
       // catch(Exception ex){
       //   System.out.println("ERRO!");
       // }
-      
+
       Arquivo arquivo = new Arquivo();
 
       do{
