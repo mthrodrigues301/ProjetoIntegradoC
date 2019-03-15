@@ -7,7 +7,13 @@ public class Labirinto {
       String caminho;
       String str;
 
-      // Pilha<Coordernadas> pilhas1 = new Pilha<Coordernadas>();
+      // try{
+      //   Pilha<Coordenada> pilhas1 = new Pilha<Coordenada>(10);
+      // }
+      // catch(Exception ex){
+      //   System.out.println("ERRO!");
+      // }
+      
       Arquivo arquivo = new Arquivo();
 
       do{

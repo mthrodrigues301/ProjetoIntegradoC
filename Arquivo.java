@@ -7,6 +7,7 @@ public class Arquivo{
     private String caminho;
     private BufferedReader ArquivoGerado;
     private boolean entrada, saida;
+    private String linhaAtual;
 
     public void setCaminho(String caminho) throws Exception
     {
@@ -15,7 +16,6 @@ public class Arquivo{
 
         this.caminho = caminho;
     }
-
     
     public void setQtdTotalLinhas(int qtdTotalLinhas){
         this.qtdTotalLinhas = qtdTotalLinhas;
@@ -76,31 +76,30 @@ public class Arquivo{
 
     public void carregarArquivo(BufferedReader arquivo) throws Exception
     {
-        String str;
-        int count = 2;
-        int countLinhas = 1;
         this.setQtdTotalLinhas(Integer.parseInt(arquivo.readLine()));
-
-        this.setQtdPrimeiraColuna(arquivo.readLine().length());
-        this.setQtdLinhas(1);
-
-        while((str = arquivo.readLine()) != null){
-            if(isValidColunas(str.length()) && str.contains("#"))
-                this.qtdColunas = str.length();
+        
+        this.linhaAtual = arquivo.readLine();
+        if(isValidLinhas() == true){
+            this.setQtdPrimeiraColuna(this.linhaAtual.length());
+            this.setQtdLinhas(1);
+        }   
+        
+        while((this.linhaAtual = arquivo.readLine()) != null){
+            if(this.isValidColunas(this.linhaAtual.length()) && this.isValidLinhas())
+                this.qtdColunas = this.linhaAtual.length();
             else
-                throw new Exception("Arquivo invalido! " + count + " linha do labirinto com coluna(s) invalida(s)!");
+                throw new Exception("Arquivo invalido! " + this.getQtdLinhas() + " linha do labirinto com coluna(s) invalida(s)!");
             
-            if(str.contains("E") || str.contains("e"))
+            if(this.linhaAtual.contains("E") || this.linhaAtual.contains("e"))
                 this.entrada = true;
             
-            if(str.contains("S") || str.contains("s"))
+            if(this.linhaAtual.contains("S") || this.linhaAtual.contains("s"))
                 this.saida = true;    
             
-            this.setQtdLinhas(1);    
-            count ++;
+            this.setQtdLinhas(1);
           }   
           
-        if(!this.isValidLinhas())
+        if(!this.isValidQtdLinhas())
             throw new Exception("Arquivo invalido! Linhas do labirinto nao coincidem com o total.");
         arquivo.close();
     }
@@ -119,10 +118,21 @@ public class Arquivo{
         return false;
     }
 
-    public boolean isValidLinhas(){
+    public boolean isValidQtdLinhas(){
         if(this.qtdTotalLinhas == this.qtdLinhas)
             return true;
         
         return false;
+    }
+
+    private boolean isValidLinhas(){
+        for(int i = 0; i < this.linhaAtual.length(); i++){
+            if(this.linhaAtual.charAt(i) == '#' || this.linhaAtual.charAt(i) == 'E' || this.linhaAtual.charAt(i) == 'S' || this.linhaAtual.charAt(i) == ' ')
+                continue;    
+            else
+                return false;
+        }
+
+        return true;
     }
 }

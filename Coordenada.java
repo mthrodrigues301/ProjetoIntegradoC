@@ -1,6 +1,12 @@
 public class Coordenada 
 {
     private int linha, coluna;
+
+    public Coordenada()
+    {
+        this.linha = 0;
+        this.coluna = 0;
+    }
     
     public void setLinha(int linha) 
     {
