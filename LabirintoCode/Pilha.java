@@ -60,5 +60,11 @@ public class Pilha <X>
     public int getQuantos ()
     {
         return this.ultimo+1;
-    }     
+    }
+    
+    public String toString(){
+        return (this.ultimo+1)+
+                " elementos"+
+                (this.ultimo != -1 ?", sendo o ultimo " + this.vetor[this.ultimo] : "");
+    }
 }

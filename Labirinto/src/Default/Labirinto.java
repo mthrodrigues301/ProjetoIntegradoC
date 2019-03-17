@@ -1,0 +1,59 @@
+package Default;
+
+import java.io.*;
+
+public class Labirinto {
+    public static void main(String[] args) {
+      
+      BufferedReader in = null;
+
+      // try{
+      //   Pilha<Coordenada> pilhas1 = new Pilha<Coordenada>(10);
+      // }
+      // catch(Exception ex){
+      //   System.out.println("ERRO!");
+      // }
+
+      Arquivo arquivo = new Arquivo();
+
+      do{
+        try
+        {
+            System.out.print("Digite o caminho do arquivo: ");
+            arquivo.setCaminho(Teclado.getUmString());
+            in = arquivo.lerArquivo();
+        }
+        catch(Exception ex)
+        {
+          System.err.println("Erro ao ler o arquivo ou caminho invalido! Tente novamente ...");
+        }
+      }while(arquivo.isValidCriarArquivo());
+
+      try
+      {
+        arquivo.carregarArquivo(in);
+
+        System.out.println("Quantidade de linhas: " + arquivo.getQtdLinhas());
+
+        System.out.println("Quantidade de colunas na primeira linhas: " + arquivo.getQtdPrimeiraColuna());
+
+        System.out.println("Quantidade de colunas nas demais linhas: " + arquivo.getQtdColunas());
+
+        if(arquivo.getEntrada() && arquivo.getSaida())
+          System.out.println("Arquivo valido, existe entrada e saida!");
+        else 
+          if(arquivo.getEntrada())
+        	  throw new Exception("Arquivo invalido! Existe somente entrada!");  
+          else
+            if(arquivo.getSaida())
+            	throw new Exception("Arquivo invalido! Existe somente saida!");
+            else
+              throw new Exception("Arquivo invalido! Nao existe entrada nem saida!");
+        
+        in.close();
+        }
+        catch(Exception ex){
+        	System.err.println(ex.getMessage());
+        }
+    }
+}
