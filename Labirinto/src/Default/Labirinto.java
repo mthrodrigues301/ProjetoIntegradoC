@@ -33,27 +33,20 @@ public class Labirinto {
       {
         arquivo.carregarArquivo(in);
 
+        if((arquivo.getEntrada() && arquivo.getQtdEntrada() == 1) && (arquivo.getSaida()) && arquivo.getQtdSaida() == 1)
+            System.out.println("Arquivo valido, existe entrada e saida!");
+          else 
+          	throw new Exception("Arquivo valido! Deve conter uma entrada e uma saida");
+        
         System.out.println("Quantidade de linhas: " + arquivo.getQtdLinhas());
 
         System.out.println("Quantidade de colunas na primeira linhas: " + arquivo.getQtdPrimeiraColuna());
 
         System.out.println("Quantidade de colunas nas demais linhas: " + arquivo.getQtdColunas());
-
-        if(arquivo.getEntrada() && arquivo.getSaida())
-          System.out.println("Arquivo valido, existe entrada e saida!");
-        else 
-          if(arquivo.getEntrada())
-        	  throw new Exception("Arquivo invalido! Existe somente entrada!");  
-          else
-            if(arquivo.getSaida())
-            	throw new Exception("Arquivo invalido! Existe somente saida!");
-            else
-              throw new Exception("Arquivo invalido! Nao existe entrada nem saida!");
         
-        in.close();
-        }
-        catch(Exception ex){
+        in.close();        
+       }catch(Exception ex){
         	System.err.println(ex.getMessage());
-        }
+       }
     }
 }
