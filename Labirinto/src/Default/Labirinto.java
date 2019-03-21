@@ -7,13 +7,6 @@ public class Labirinto {
       
       BufferedReader in = null;
 
-      // try{
-      //   Pilha<Coordenada> pilhas1 = new Pilha<Coordenada>(10);
-      // }
-      // catch(Exception ex){
-      //   System.out.println("ERRO!");
-      // }
-
       Arquivo arquivo = new Arquivo();
 
       do{
@@ -37,6 +30,8 @@ public class Labirinto {
             System.out.println("Arquivo valido, existe entrada e saida!");
           else 
           	throw new Exception("Arquivo valido! Deve conter uma entrada e uma saida");
+        
+        arquivo.carregarLabirinto();
         
         System.out.println("Quantidade de linhas: " + arquivo.getQtdLinhas());
 

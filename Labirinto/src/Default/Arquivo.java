@@ -6,18 +6,21 @@ import java.io.FileReader;
 public class Arquivo{
 
     private int qtdTotalLinhas = 0, qtdLinhas = 0, qtdPrimeiraColuna = 0, qtdColunas = 0;
-    private String caminho;
+    private String caminhoArquivo;
     private BufferedReader ArquivoGerado;
     private boolean entrada = false, saida = false;
     private int qtdEntrada = 0, qtdSaida = 0;
     private String linhaAtual;
+    private char[][] labirinto;
+    private Pilha<Coordenada> caminho;
+    private Pilha<Pilha<Coordenada>> possibilidades;
 
     public void setCaminho(String caminho) throws Exception
     {
         if(caminho == null)
             throw new Exception("Erro!");
 
-        this.caminho = caminho;
+        this.caminhoArquivo = caminho;
     }
     
     public void setQtdTotalLinhas(String linhas)throws Exception
@@ -49,7 +52,7 @@ public class Arquivo{
     }
 
     public String getCaminho(){
-        return this.caminho;
+        return this.caminhoArquivo;
     }
     
     public int getQtdTotalLinhas(){
@@ -93,7 +96,7 @@ public class Arquivo{
 
     public BufferedReader lerArquivo() throws Exception
     {   
-        this.ArquivoGerado = new BufferedReader(new FileReader(caminho));
+        this.ArquivoGerado = new BufferedReader(new FileReader(this.caminhoArquivo));
 
         if(this.isValidCriarArquivo())
             throw new Exception("Erro!");
@@ -133,6 +136,30 @@ public class Arquivo{
         }
     }
 
+    public void carregarLabirinto()throws Exception {
+    	BufferedReader in = null;
+    	
+    	try {		
+            in = this.lerArquivo();
+            
+    		this.setQtdTotalLinhas(in.readLine());
+    		
+    	  labirinto = new char[this.getQtdTotalLinhas()][this.getQtdColunas()];
+    	  
+    	  for(int i = 0; i < this.getQtdTotalLinhas(); i++) {
+    		  this.linhaAtual = in.readLine();
+    			for(int j = 0; j < this.getQtdColunas(); j++) {
+        			System.out.print(this.linhaAtual.charAt(j));
+    				labirinto[i][j] = this.linhaAtual.charAt(j);  
+        		}
+    			System.out.println();
+            }
+    	}catch(Exception ex) {
+    		throw new Exception(ex.getMessage());
+    	}    	
+    	
+    }
+    
     private boolean isValidColunas(int tamanhoColuna){
         if(tamanhoColuna == this.qtdPrimeiraColuna)
             return true;
