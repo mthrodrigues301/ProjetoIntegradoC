@@ -3,45 +3,42 @@ package Default;
 import java.io.*;
 
 public class Labirinto {
-    public static void main(String[] args) {
-      
-      BufferedReader in = null;
+	public static void main(String[] args) {
 
-      Arquivo arquivo = new Arquivo();
+		BufferedReader in = null;
 
-      do{
-        try
-        {
-            System.out.print("Digite o caminho do arquivo: ");
-            arquivo.setCaminho(Teclado.getUmString());
-            in = arquivo.lerArquivo();
-        }
-        catch(Exception ex)
-        {
-          System.err.println("Erro ao ler o arquivo ou caminho invalido! Tente novamente ...");
-        }
-      }while(arquivo.isValidCriarArquivo());
+		Arquivo arquivo = new Arquivo();
 
-      try
-      {
-        arquivo.carregarArquivo(in);
+		do {
+			try {
+				System.out.print("Digite o caminho do arquivo: ");
+				arquivo.setCaminho(Teclado.getUmString());
+				in = arquivo.lerArquivo();
+			} catch (Exception ex) {
+				System.err.println("Erro ao ler o arquivo ou caminho invalido! Tente novamente ...");
+			}
+		} while (arquivo.isValidCriarArquivo());
 
-        if((arquivo.getEntrada() && arquivo.getQtdEntrada() == 1) && (arquivo.getSaida()) && arquivo.getQtdSaida() == 1)
-            System.out.println("Arquivo valido, existe entrada e saida!");
-          else 
-          	throw new Exception("Arquivo valido! Deve conter uma entrada e uma saida");
-        
-        arquivo.carregarLabirinto();
-        
-        System.out.println("Quantidade de linhas: " + arquivo.getQtdLinhas());
+		try {
+			arquivo.carregarArquivo(in);
 
-        System.out.println("Quantidade de colunas na primeira linhas: " + arquivo.getQtdPrimeiraColuna());
+			if ((arquivo.getEntrada() && arquivo.getQtdEntrada() == 1) && (arquivo.getSaida())
+					&& arquivo.getQtdSaida() == 1)
+				System.out.println("Arquivo valido, existe entrada e saida!");
+			else
+				throw new Exception("Arquivo valido! Deve conter uma entrada e uma saida");
 
-        System.out.println("Quantidade de colunas nas demais linhas: " + arquivo.getQtdColunas());
-        
-        in.close();        
-       }catch(Exception ex){
-        	System.err.println(ex.getMessage());
-       }
-    }
+			arquivo.carregarLabirinto();
+
+			System.out.println("Quantidade de linhas: " + arquivo.getQtdLinhas());
+
+			System.out.println("Quantidade de colunas na primeira linhas: " + arquivo.getQtdPrimeiraColuna());
+
+			System.out.println("Quantidade de colunas nas demais linhas: " + arquivo.getQtdColunas());
+
+			in.close();
+		} catch (Exception ex) {
+			System.err.println(ex.getMessage());
+		}
+	}
 }
