@@ -3,11 +3,15 @@ package Default;
 public class Coordenada {
 	private int linha, coluna;
 
-	public Coordenada(int i, int j) {
-		this.linha = 0;
-		this.coluna = 0;
+	public Coordenada(int linha, int coluna) {
+		this.linha = linha;
+		this.coluna = coluna;
 	}
 
+	public void setCoordenada(Coordenada coordenada) {
+		this.linha = coordenada.getLinha();
+		this.coluna = coordenada.getColuna();
+	}
 	public void setLinha(int linha) {
 		this.linha = linha;
 	}
