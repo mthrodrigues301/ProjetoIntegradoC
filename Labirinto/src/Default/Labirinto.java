@@ -29,7 +29,8 @@ public class Labirinto {
 				throw new Exception("Arquivo valido! Deve conter uma entrada e uma saida");
 
 			arquivo.carregarLabirinto();
-
+			arquivo.progressivo();
+			
 			System.out.println("Quantidade de linhas: " + arquivo.getQtdLinhas());
 
 			System.out.println("Quantidade de colunas na primeira linhas: " + arquivo.getQtdPrimeiraColuna());

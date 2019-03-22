@@ -158,31 +158,54 @@ public class Arquivo {
 		int qtdLinhas = this.getQtdLinhas();
 		int qtdColunas = this.getQtdColunas();
 		int total = qtdLinhas * qtdColunas;
+		System.out.println(qtdLinhas);
+		System.out.println(qtdColunas);
+		System.out.println(total);
+		System.out.println("QUEJO: " + this.atual);
+		
 		try {
 			this.possibilidades = new Pilha<Pilha<Coordenada>>(total);
 			this.caminho = new Pilha<Coordenada>(total);
 			this.adjacentes = new Pilha<Coordenada>(3);
-
-			if ((this.labirinto[this.atual.getLinha() - 1][this.atual.getColuna()] == ' '
-					|| this.labirinto[this.atual.getLinha() - 1][this.atual.getColuna()] == 'S')
-					&& this.atual.getLinha() > 0) {
-				this.adjacentes.guarde(new Coordenada((this.atual.getLinha() - 1), this.atual.getColuna()));
-			} else if ((this.labirinto[this.atual.getLinha() + 1][this.atual.getColuna()] == ' '
-					|| this.labirinto[this.atual.getLinha() + 1][this.atual.getColuna()] == 'S')
-					&& this.atual.getLinha() < this.getQtdTotalLinhas()) {
-				this.adjacentes.guarde(new Coordenada((this.atual.getLinha() + 1), this.atual.getColuna()));
-			} else if ((this.labirinto[this.atual.getLinha()][this.atual.getColuna() + 1] == ' '
-					|| this.labirinto[this.atual.getLinha() + 1][this.atual.getColuna()] == 'S')
-					&& this.atual.getColuna() > 0) {
-				this.adjacentes.guarde(new Coordenada(this.atual.getLinha(), (this.atual.getColuna() - 1)));
-			} else if ((this.labirinto[this.atual.getLinha()][this.atual.getColuna() - 1] == ' '
-					|| this.labirinto[this.atual.getLinha() + 1][this.atual.getColuna()] == 'S')
-					&& this.atual.getColuna() < this.getQtdColunas()) {
-				this.adjacentes.guarde(new Coordenada(this.atual.getLinha(), (this.atual.getColuna() + 1)));
+			
+			while(this.labirinto[this.atual.getLinha()][this.atual.getColuna()] != 'S') {
+				System.out.println("TAMO NO IAOU");
+				this.caminho.guarde(this.atual);
+				// VALIDAR ACIMA
+				if (this.labirinto[this.atual.getLinha() - 1][this.atual.getColuna()] == ' '
+						&& this.atual.getLinha() > 0) {
+					System.out.println("ACIMA");
+					this.adjacentes.guarde(new Coordenada((this.atual.getLinha() - 1), this.atual.getColuna()));
+				}
+				//VALIDAR ABAIXO
+				else if (this.labirinto[this.atual.getLinha() + 1][this.atual.getColuna()] == ' '
+						&& this.atual.getLinha() < this.getQtdTotalLinhas()) {
+					System.out.println("ABAIXO");
+					this.adjacentes.guarde(new Coordenada((this.atual.getLinha() + 1), this.atual.getColuna()));
+				} 
+				//VALIDAR ESQUERDA
+				else if (this.atual.getColuna() > 0 && this.labirinto[this.atual.getLinha()][this.atual.getColuna() - 1] == ' ') {
+					System.out.println("ESQUERDA");
+					this.adjacentes.guarde(new Coordenada(this.atual.getLinha(), (this.atual.getColuna() - 1)));
+				}
+				//VALIDAR DIRETA
+				else if (this.labirinto[this.atual.getLinha()][this.atual.getColuna() + 1] == ' '
+						&& this.atual.getColuna() < this.getQtdColunas()) {
+					System.out.println("DIREITA");
+					this.adjacentes.guarde(new Coordenada(this.atual.getLinha(), (this.atual.getColuna() + 1)));
+				}
+				
+				this.atual.setCoordenada(this.adjacentes.getValor());
+				System.out.println(this.atual);
+				this.adjacentes.jogueForaValor();
+				System.out.println(this.adjacentes);
+				this.possibilidades.guarde(this.adjacentes);
+				System.out.println(this.possibilidades);
 			}
-
+			
 		} catch (Exception ex) {
-
+			System.err.println("o DU DEU AQUI");
+			System.err.println(ex.getMessage());
 		}
 	}
 
