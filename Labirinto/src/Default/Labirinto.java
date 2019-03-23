@@ -12,7 +12,7 @@ public class Labirinto {
 		do {
 			try {
 				System.out.print("Digite o caminho do arquivo: ");
-				arquivo.setCaminho(Teclado.getUmString());
+				arquivo.setCaminhoArquivo(Teclado.getUmString());
 				in = arquivo.lerArquivo();
 			} catch (Exception ex) {
 				System.err.println("Erro ao ler o arquivo ou caminho invalido! Tente novamente ...");
@@ -27,14 +27,17 @@ public class Labirinto {
 				System.out.println("Arquivo valido, existe entrada e saida!");
 			else
 				throw new Exception("Arquivo valido! Deve conter uma entrada e uma saida");
-
-			arquivo.carregarLabirinto();
-
+			
 			System.out.println("Quantidade de linhas: " + arquivo.getQtdLinhas());
 
 			System.out.println("Quantidade de colunas na primeira linhas: " + arquivo.getQtdPrimeiraColuna());
 
 			System.out.println("Quantidade de colunas nas demais linhas: " + arquivo.getQtdColunas());
+			
+			System.out.println();
+			
+			arquivo.carregarLabirinto();
+			arquivo.progressivo();		
 
 			in.close();
 		} catch (Exception ex) {

@@ -8,6 +8,10 @@ public class Coordenada {
 		this.coluna = coluna;
 	}
 
+	public void setCoordenada(Coordenada coordenada) {
+		this.linha = coordenada.getLinha();
+		this.coluna = coordenada.getColuna();
+	}
 	public void setLinha(int linha) {
 		this.linha = linha;
 	}

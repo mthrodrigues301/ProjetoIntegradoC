@@ -13,14 +13,14 @@ public class Arquivo {
 	private int qtdEntrada = 0, qtdSaida = 0;
 	private String linhaAtual;
 	private char[][] labirinto;
-	private Pilha<Coordenada> caminho, adjacentes;
+	private Pilha<Coordenada> caminho, adjacentes, inverso;
 	private Pilha<Pilha<Coordenada>> possibilidades;
 
-	public void setCaminho(String caminho) throws Exception {
-		if (caminho == null)
+	public void setCaminhoArquivo(String caminhoArquivo) throws Exception {
+		if (caminhoArquivo == null)
 			throw new Exception("Erro!");
 
-		this.caminhoArquivo = caminho;
+		this.caminhoArquivo = caminhoArquivo;
 	}
 
 	public void setQtdTotalLinhas(String linhas) throws Exception {
@@ -47,7 +47,7 @@ public class Arquivo {
 		this.qtdPrimeiraColuna = qtdPrimeiraColuna;
 	}
 
-	public String getCaminho() {
+	public String getCaminhoArquivo() {
 		return this.caminhoArquivo;
 	}
 
@@ -91,7 +91,7 @@ public class Arquivo {
 	}
 
 	public BufferedReader lerArquivo() throws Exception {
-		this.ArquivoGerado = new BufferedReader(new FileReader(this.caminhoArquivo));
+		this.ArquivoGerado = new BufferedReader(new FileReader(this.getCaminhoArquivo()));
 
 		if (this.isValidCriarArquivo())
 			throw new Exception("Erro!");
@@ -154,35 +154,100 @@ public class Arquivo {
 		}
 	}
 
-	public void progressivo() {
+	public void progressivo() throws Exception{
 		int qtdLinhas = this.getQtdLinhas();
 		int qtdColunas = this.getQtdColunas();
 		int total = qtdLinhas * qtdColunas;
+
 		try {
 			this.possibilidades = new Pilha<Pilha<Coordenada>>(total);
 			this.caminho = new Pilha<Coordenada>(total);
-			this.adjacentes = new Pilha<Coordenada>(3);
 
-			if ((this.labirinto[this.atual.getLinha() - 1][this.atual.getColuna()] == ' '
-					|| this.labirinto[this.atual.getLinha() - 1][this.atual.getColuna()] == 'S')
-					&& this.atual.getLinha() > 0) {
-				this.adjacentes.guarde(new Coordenada((this.atual.getLinha() - 1), this.atual.getColuna()));
-			} else if ((this.labirinto[this.atual.getLinha() + 1][this.atual.getColuna()] == ' '
-					|| this.labirinto[this.atual.getLinha() + 1][this.atual.getColuna()] == 'S')
-					&& this.atual.getLinha() < this.getQtdTotalLinhas()) {
-				this.adjacentes.guarde(new Coordenada((this.atual.getLinha() + 1), this.atual.getColuna()));
-			} else if ((this.labirinto[this.atual.getLinha()][this.atual.getColuna() + 1] == ' '
-					|| this.labirinto[this.atual.getLinha() + 1][this.atual.getColuna()] == 'S')
-					&& this.atual.getColuna() > 0) {
-				this.adjacentes.guarde(new Coordenada(this.atual.getLinha(), (this.atual.getColuna() - 1)));
-			} else if ((this.labirinto[this.atual.getLinha()][this.atual.getColuna() - 1] == ' '
-					|| this.labirinto[this.atual.getLinha() + 1][this.atual.getColuna()] == 'S')
-					&& this.atual.getColuna() < this.getQtdColunas()) {
-				this.adjacentes.guarde(new Coordenada(this.atual.getLinha(), (this.atual.getColuna() + 1)));
+			while (this.labirinto[this.atual.getLinha()][this.atual.getColuna()] != 'S') {
+				while (this.labirinto[this.atual.getLinha()][this.atual.getColuna()] != '*'
+						&& (this.labirinto[this.atual.getLinha()][this.atual.getColuna()] == ' '
+								|| this.labirinto[this.atual.getLinha()][this.atual.getColuna()] == 'E'
+								|| this.labirinto[this.atual.getLinha()][this.atual.getColuna()] == 'S')) {
+					this.adjacentes = new Pilha<Coordenada>(3);
+
+					// VALIDAR ACIMA
+					if (this.atual.getLinha() > 0
+							&& (this.labirinto[this.atual.getLinha() - 1][this.atual.getColuna()] == ' '
+									|| this.labirinto[this.atual.getLinha() - 1][this.atual.getColuna()] == ' ')) {
+						this.adjacentes.guarde(new Coordenada((this.atual.getLinha() - 1), this.atual.getColuna()));
+					}
+					// VALIDAR ABAIXO
+					if (this.atual.getLinha() < this.getQtdTotalLinhas()
+							&& (this.labirinto[this.atual.getLinha() + 1][this.atual.getColuna()] == ' '
+									|| this.labirinto[this.atual.getLinha() + 1][this.atual.getColuna()] == 'S')) {
+						this.adjacentes.guarde(new Coordenada((this.atual.getLinha() + 1), this.atual.getColuna()));
+					}
+					// VALIDAR ESQUERDA
+					if (this.atual.getColuna() > 0
+							&& (this.labirinto[this.atual.getLinha()][this.atual.getColuna() - 1] == ' '
+									|| this.labirinto[this.atual.getLinha()][this.atual.getColuna() - 1] == 'S')) {
+						this.adjacentes.guarde(new Coordenada(this.atual.getLinha(), (this.atual.getColuna() - 1)));
+					}
+					// VALIDAR DIRETA
+					if (this.atual.getColuna() < this.getQtdColunas()
+							&& (this.labirinto[this.atual.getLinha()][this.atual.getColuna() + 1] == ' '
+									|| this.labirinto[this.atual.getLinha()][this.atual.getColuna() + 1] == 'S')) {
+						this.adjacentes.guarde(new Coordenada(this.atual.getLinha(), (this.atual.getColuna() + 1)));
+					}
+
+					this.labirinto[this.atual.getLinha()][this.atual.getColuna()] = '*';
+					if (!this.adjacentes.isVazia()) {
+						this.atual.setCoordenada(this.adjacentes.getValor());
+						
+						if (this.labirinto[this.atual.getLinha()][this.atual.getColuna()] == 'S') {
+							this.adjacentes.jogueForaValor();
+							break;
+						}
+
+						this.caminho.guarde(new Coordenada(this.atual.getLinha(), this.atual.getColuna()));
+						this.adjacentes.jogueForaValor();
+						this.possibilidades.guarde(this.adjacentes);
+					}
+				}
+
+				if (this.labirinto[this.atual.getLinha()][this.atual.getColuna()] == 'S')
+					break;
+
+				regressivo();
 			}
 
-		} catch (Exception ex) {
+			this.inverso = new Pilha<Coordenada>(total);
 
+			while (!this.caminho.isVazia()) {
+				this.inverso.guarde(this.caminho.getValor());
+				this.caminho.jogueForaValor();
+			}
+
+			while (!this.inverso.isVazia()) {
+				System.out.print(" " + this.inverso.getValor());
+				this.inverso.jogueForaValor();
+			}
+		} catch (Exception ex) {
+			throw new Exception("Não existe caminho que leva da entrada até a saida!");
+		}
+	}
+
+	public void regressivo() {
+		try {
+			this.adjacentes = new Pilha<Coordenada>(3);
+
+			while (this.adjacentes.isVazia()) {
+				this.labirinto[this.atual.getLinha()][this.atual.getColuna()] = ' ';
+				this.caminho.jogueForaValor();
+				this.atual.setCoordenada(this.caminho.getValor());
+				this.adjacentes = this.possibilidades.getValor();
+				this.possibilidades.jogueForaValor();
+			}
+			
+			this.atual = this.adjacentes.getValor();
+			
+		} catch (Exception ex) {
+			System.err.println(ex.getMessage());
 		}
 	}
 
