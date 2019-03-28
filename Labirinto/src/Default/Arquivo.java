@@ -234,7 +234,7 @@ public class Arquivo {
 		}
 	}
 
-	public void regressivo() {
+	private void regressivo() {
 		try {
 			this.adjacentes = new Pilha<Coordenada>(3);
 
