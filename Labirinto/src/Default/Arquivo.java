@@ -194,8 +194,10 @@ public class Arquivo {
 									|| this.labirinto[this.atual.getLinha()][this.atual.getColuna() + 1] == 'S')) {
 						this.adjacentes.guarde(new Coordenada(this.atual.getLinha(), (this.atual.getColuna() + 1)));
 					}
-
-					this.labirinto[this.atual.getLinha()][this.atual.getColuna()] = '*';
+					
+					if(this.labirinto[this.atual.getLinha()][this.atual.getColuna()] != 'E') {
+						this.labirinto[this.atual.getLinha()][this.atual.getColuna()] = '*';
+					}
 					if (!this.adjacentes.isVazia()) {
 						this.atual.setCoordenada(this.adjacentes.getValor());
 						
@@ -245,6 +247,7 @@ public class Arquivo {
 			}
 			
 			this.atual = this.adjacentes.getValor();
+			this.caminho.guarde(new Coordenada(this.atual.getLinha(), this.atual.getColuna()));
 			
 		} catch (Exception ex) {
 			System.err.println(ex.getMessage());
