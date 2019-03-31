@@ -1,12 +1,17 @@
 package Default;
 
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.FileReader;
+import java.io.FileWriter;
+import java.sql.Date;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 
 public class Arquivo {
 
 	private int qtdTotalLinhas = 0, qtdLinhas = 0, qtdPrimeiraColuna = 0, qtdColunas = 0;
-	private String caminhoArquivo;
+	private String caminhoArquivoEntrada, caminhoArquivoSaida;
 	private BufferedReader ArquivoGerado;
 	private boolean entrada = false, saida = false;
 	private Coordenada atual;
@@ -16,11 +21,18 @@ public class Arquivo {
 	private Pilha<Coordenada> caminho, adjacentes, inverso;
 	private Pilha<Pilha<Coordenada>> possibilidades;
 
-	public void setCaminhoArquivo(String caminhoArquivo) throws Exception {
-		if (caminhoArquivo == null)
+	public void setCaminhoArquivoEntrada(String caminhoArquivoEntrada) throws Exception {
+		if (caminhoArquivoEntrada == null)
 			throw new Exception("Erro!");
 
-		this.caminhoArquivo = caminhoArquivo;
+		this.caminhoArquivoEntrada = caminhoArquivoEntrada;
+	}
+	
+	public void setCaminhoArquivoSaida(String caminhoArquivoSaida) throws Exception {
+		if (caminhoArquivoSaida == null)
+			throw new Exception("Erro!");
+		
+		this.caminhoArquivoSaida = caminhoArquivoSaida;
 	}
 
 	public void setQtdTotalLinhas(String linhas) throws Exception {
@@ -47,8 +59,12 @@ public class Arquivo {
 		this.qtdPrimeiraColuna = qtdPrimeiraColuna;
 	}
 
-	public String getCaminhoArquivo() {
-		return this.caminhoArquivo;
+	public String getCaminhoArquivoEntrada() {
+		return this.caminhoArquivoEntrada;
+	}
+	
+	public String getCaminhoArquivoSaida() {
+		return this.caminhoArquivoSaida;
 	}
 
 	public int getQtdTotalLinhas() {
@@ -91,12 +107,30 @@ public class Arquivo {
 	}
 
 	public BufferedReader lerArquivo() throws Exception {
-		this.ArquivoGerado = new BufferedReader(new FileReader(this.getCaminhoArquivo()));
+		this.ArquivoGerado = new BufferedReader(new FileReader(this.getCaminhoArquivoEntrada()));
 
 		if (this.isValidCriarArquivo())
 			throw new Exception("Erro!");
 
 		return this.ArquivoGerado;
+	}
+	
+	public void escreverArquivo() throws Exception {
+		try {
+			int now = LocalDateTime.now().getSecond();
+			BufferedWriter arquivoSaida =  new BufferedWriter(new FileWriter(this.getCaminhoArquivoSaida()+"ArquivoSaida_"+now+".txt"));
+
+			for(int i = 0; i < this.qtdLinhas; i++) {
+				for(int k = 0; k < this.qtdColunas; k++) {
+					arquivoSaida.write(this.labirinto[i][k]);
+				}
+				arquivoSaida.write("\n");
+			}
+			
+			arquivoSaida.close();
+		}catch(Exception ex) {
+			throw new Exception("Erro ao escrever o arquivo de saida!");
+		}
 	}
 
 	public void carregarArquivo(BufferedReader arquivo) throws Exception {

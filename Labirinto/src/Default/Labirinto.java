@@ -6,16 +6,29 @@ public class Labirinto {
 	public static void main(String[] args) {
 
 		BufferedReader in = null;
+		BufferedWriter out = null;
 
 		Arquivo arquivo = new Arquivo();
 
 		do {
 			try {
-				System.out.print("Digite o caminho do arquivo: ");
-				arquivo.setCaminhoArquivo(Teclado.getUmString());
+				try {
+					System.out.print("Digite o caminho do arquivo: ");
+					arquivo.setCaminhoArquivoEntrada(Teclado.getUmString());
+				}catch(Exception ex) {
+					throw new Exception("Erro ao ler o arquivo ou caminho entrada invalido! Tente novamente ...");
+				}
+				
+				try {
+					System.out.print("Digite o caminho da saida do arquivo: ");
+					arquivo.setCaminhoArquivoSaida(Teclado.getUmString());
+				}catch(Exception ex) {
+					throw new Exception("Erro ao ler caminho entrada saida! Tente novamente ...");
+				}
+				
 				in = arquivo.lerArquivo();
 			} catch (Exception ex) {
-				System.err.println("Erro ao ler o arquivo ou caminho invalido! Tente novamente ...");
+				System.err.println(ex.getMessage());
 			}
 		} while (arquivo.isValidCriarArquivo());
 
@@ -37,8 +50,9 @@ public class Labirinto {
 			System.out.println();
 			
 			arquivo.carregarLabirinto();
-			arquivo.progressivo();		
-
+			arquivo.progressivo();				
+			arquivo.escreverArquivo();
+			
 			in.close();
 		} catch (Exception ex) {
 			System.err.println(ex.getMessage());
