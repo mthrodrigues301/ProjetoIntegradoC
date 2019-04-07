@@ -39,7 +39,7 @@ public class Labirinto {
 					&& arquivo.getQtdSaida() == 1)
 				System.out.println("Arquivo valido, existe entrada e saida!");
 			else
-				throw new Exception("Arquivo valido! Deve conter uma entrada e uma saida");
+				throw new Exception("Arquivo invalido! Deve conter uma entrada e uma saida");
 			
 			System.out.println("Quantidade de linhas: " + arquivo.getQtdLinhas());
 

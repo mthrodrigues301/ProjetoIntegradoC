@@ -264,7 +264,7 @@ public class Arquivo {
 				this.inverso.jogueForaValor();
 			}
 		} catch (Exception ex) {
-			throw new Exception("Não existe caminho que leva da entrada até a saida!");
+			throw new Exception("Nï¿½o existe caminho que leva da entrada atï¿½ a saida!");
 		}
 	}
 
@@ -336,6 +336,16 @@ public class Arquivo {
 						this.setQtdSaida(1);
 					}
 				} else if (i == this.linhaAtual.length()) {
+					if (this.linhaAtual.charAt(i) == 'E') {
+						this.entrada = true;
+						this.setQtdEntrada(1);
+					}
+
+					if (this.linhaAtual.charAt(i) == 'S') {
+						this.saida = true;
+						this.setQtdSaida(1);
+					}
+				} else {
 					if (this.linhaAtual.charAt(i) == 'E') {
 						this.entrada = true;
 						this.setQtdEntrada(1);
