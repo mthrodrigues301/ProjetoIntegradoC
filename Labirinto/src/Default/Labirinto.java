@@ -37,7 +37,7 @@ public class Labirinto {
 
 			if ((arquivo.getEntrada() && arquivo.getQtdEntrada() == 1) && (arquivo.getSaida())
 					&& arquivo.getQtdSaida() == 1)
-				System.out.println("Arquivo valido, existe entrada e saida!");
+				System.out.println("Existe entrada e saida!");
 			else
 				throw new Exception("Arquivo invalido! Deve conter uma entrada e uma saida");
 			

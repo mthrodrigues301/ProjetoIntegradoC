@@ -201,9 +201,9 @@ public class Arquivo {
 				while (this.labirinto[this.atual.getLinha()][this.atual.getColuna()] != '*'
 						&& (this.labirinto[this.atual.getLinha()][this.atual.getColuna()] == ' '
 								|| this.labirinto[this.atual.getLinha()][this.atual.getColuna()] == 'E'
-								|| this.labirinto[this.atual.getLinha()][this.atual.getColuna()] == 'S')) {
+								|| this.labirinto[this.atual.getLinha()][this.atual.getColuna()] == 'S')) {					
 					this.adjacentes = new Pilha<Coordenada>(3);
-
+					
 					// VALIDAR ACIMA
 					if (this.atual.getLinha() > 0
 							&& (this.labirinto[this.atual.getLinha() - 1][this.atual.getColuna()] == ' '
@@ -239,7 +239,10 @@ public class Arquivo {
 							this.adjacentes.jogueForaValor();
 							break;
 						}
-
+						
+						if(this.caminho.isCheia() || this.caminho.isCheia())
+							throw new Exception("Não existe caminho que leve da entrada para a saida!");
+						
 						this.caminho.guarde(new Coordenada(this.atual.getLinha(), this.atual.getColuna()));
 						this.adjacentes.jogueForaValor();
 						this.possibilidades.guarde(this.adjacentes);
@@ -264,15 +267,18 @@ public class Arquivo {
 				this.inverso.jogueForaValor();
 			}
 		} catch (Exception ex) {
-			throw new Exception("Nï¿½o existe caminho que leva da entrada atï¿½ a saida!");
+			throw new Exception("Não existe caminho que leve da entrada para a saida!");
 		}
 	}
 
-	private void regressivo() {
+	private void regressivo() throws Exception{
 		try {
 			this.adjacentes = new Pilha<Coordenada>(3);
 
 			while (this.adjacentes.isVazia()) {
+				if(this.caminho.isVazia() || this.caminho.isVazia())
+					throw new Exception("Não existe caminho que leve da entrada para a saida!");
+					
 				this.labirinto[this.atual.getLinha()][this.atual.getColuna()] = ' ';
 				this.caminho.jogueForaValor();
 				this.atual.setCoordenada(this.caminho.getValor());
@@ -284,7 +290,7 @@ public class Arquivo {
 			this.caminho.guarde(new Coordenada(this.atual.getLinha(), this.atual.getColuna()));
 			
 		} catch (Exception ex) {
-			System.err.println(ex.getMessage());
+			throw new Exception(ex.getMessage());
 		}
 	}
 
