@@ -1,11 +1,16 @@
-<!------SCRIPT BANCO------->
+<b>Comandos importantes</b></br>
 
-USE [poo1913] GO
+USE [poo1913] GO</br>
 
-SET ANSI_NULLS ON GO
+SET ANSI_NULLS ON GO</br>
 
-SET QUOTED_IDENTIFIER ON GO
-
-CREATE TABLE [poo1913].[Musica]( [Id] [int] IDENTITY(1,1) NOT NULL, [Titulo] varchar NOT NULL, [Cantor] varchar NOT NULL, [Estilo] varchar NOT NULL, [Duracao] [int] NULL, [Preco] [decimal](5, 2) NULL, [Ativo] [bit] NOT NULL ) ON [PRIMARY] GO
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo]) VALUES ('Voce Vai Ver','Zeze Di Camargo e Luciano','Sertanejo',(RAND(123456)*(20-10+1))+10,ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1) GO
+SET QUOTED_IDENTIFIER ON GO</br>
+CREATE TABLE [poo1913].[Musica](</br> 
+<b>[Id]</b> [int] IDENTITY(1,1) NOT NULL,</br>
+<b>[Titulo]</b> varchar NOT NULL,</br>
+<b>[Cantor]</b> varchar NOT NULL,</br>
+<b>[Estilo]</b> varchar NOT NULL,</br>
+<b>[Duracao]</b> [int] NULL,</br>
+<b>[Preco]</b> [decimal](5, 2) NULL,</br>
+<b>[Ativo]</b> [bit] NOT NULL</br>
+) ON [PRIMARY] GO
