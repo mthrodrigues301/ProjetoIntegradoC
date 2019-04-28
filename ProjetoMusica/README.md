@@ -1,3 +1,5 @@
+<b>Comandos importantes</b>
+
 <!------SCRIPT BANCO------->
 
 USE [poo1913] GO
