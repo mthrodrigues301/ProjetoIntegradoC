@@ -1,4 +1,4 @@
-package projetoMusica;
+package Client;
 
 public class FilaDinamica<TipoItem> {
     private class No {
@@ -18,7 +18,8 @@ public class FilaDinamica<TipoItem> {
             return this.proximo;
         }
 
-        public void setItem(TipoItem item) {
+        @SuppressWarnings("unused")
+		public void setItem(TipoItem item) {
             this.item = item;
         }
 
@@ -168,7 +169,7 @@ public class FilaDinamica<TipoItem> {
 
         try
         {
-            ret = new FilaDinamica (this);
+            ret = new FilaDinamica<TipoItem> (this);
         }
         catch (Exception erro)
         {} // sei que this NUNCA é null e o contrutor de copia da erro quando seu parametro é null

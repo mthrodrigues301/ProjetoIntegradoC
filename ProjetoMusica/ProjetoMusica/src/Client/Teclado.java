@@ -1,4 +1,4 @@
-package projetoMusica;
+package Client;
 
 import java.io.*;
 

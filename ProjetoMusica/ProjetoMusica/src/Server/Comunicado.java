@@ -1,4 +1,4 @@
-package projetoMusica;
+package Server;
 
 import java.io.Serializable;
 

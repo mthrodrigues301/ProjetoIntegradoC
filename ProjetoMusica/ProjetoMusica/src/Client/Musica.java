@@ -1,4 +1,4 @@
-package projetoMusica;
+package Client;
 
 public class Musica implements Cloneable,Comparable<Musica> {
 	
