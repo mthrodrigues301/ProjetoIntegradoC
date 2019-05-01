@@ -1,103 +1,56 @@
-insert into Musica values ('Numb',                           'Linkin park',  'Rock',         Rand(240) + 68,3.50,1)
-insert into Musica values ('In the End',                     'Linkin park',  'Rock',         Rand(240) + 68,3.50,1)
-insert into Musica values ('Castle of Glass',                'Linkin park',  'Rock',         Rand(240) + 68,3.50,1)
-insert into Musica values ('What i have done ',              'Linkin park',  'Rock',         Rand(240) + 68,3.50,1)
-insert into Musica values ('Burn it down',                   'Linkin park',  'Rock',         Rand(240) + 68,3.50,1)
-insert into Musica values ('New Divide',                     'Linkin park',  'Rock',         Rand(240) + 68,3.50,1)
-insert into Musica values ('Crawling',			             'Linkin park',  'Rock',         Rand(240) + 68,3.50,1)
-insert into Musica values ('Lost in the echo',               'Linkin park',  'Rock',         Rand(240) + 68,3.50,1)
-insert into Musica values ('Breaking the habit',             'Linkin park',  'Rock',         Rand(240) + 68,3.50,1)
-insert into Musica values ('One more light',                 'Linkin park',  'Rock',         Rand(240) + 68,3.50,1)
-insert into Musica values ('The Unforgiven',                 'Metallica',    'Heavy Metal',  Rand(240) + 68,3.50,1)
-insert into Musica values ('The Unforgiven II',              'Metallica',    'Heavy Metal',  Rand(240) + 68,3.50,1)
-insert into Musica values ('The Unforgiven III',             'Metallica',    'Heavy Metal',  Rand(240) + 68,3.50,1)
-insert into Musica values ('One',                            'Metallica',    'Heavy Metal',  Rand(240) + 68,3.50,1)
-insert into Musica values ('Nothing Else Matters',           'Metallica',    'Heavy Metal',  Rand(240) + 68,3.50,1)
-insert into Musica values ('Hero of the day',                'Metallica',    'Heavy Metal',  Rand(240) + 68,3.50,1)
-insert into Musica values ('Turn the Page',                  'Metallica',    'Heavy Metal',  Rand(240) + 68,3.50,1)
-insert into Musica values ('Enter Sandman',                  'Metallica',    'Heavy Metal',  Rand(240) + 68,3.50,1)
-insert into Musica values ('Danado de Bom',                  'Luis Gonzaga', 'Forro',        Rand(240) + 68,3.50,1)
-insert into Musica values ('O Sanfoneiro do povo de Deus',   'Luis Gonzaga', 'Forro',        Rand(240) + 68,3.50,1)
-insert into Musica values ('Sanfoneiro Macho',               'Luis Gonzaga', 'Forro',        Rand(240) + 68,3.50,1)
-insert into Musica values ('Quadrilhas e marchinhas juninas','Luis Gonzaga', 'Forro',        Rand(240) + 68,3.50,1)
-insert into Musica values ('Volta pra curtir ao vivo',       'Luis Gonzaga', 'Forro',        Rand(240) + 68,3.50,1)
-insert into Musica values ('Aquilo Bom',                     'Luis Gonzaga', 'Forro',        Rand(240) + 68,3.50,1)
-insert into Musica values ('Eterno cantador',                'Luis Gonzaga', 'Forro',        Rand(240) + 68,3.50,1)
-insert into Musica values ('Fuego',                          'Alok',         'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('Hear Me Now',                    'Alok',         'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('All the Lies',                   'Alok',         'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('Ocean',                          'Alok',         'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('Big jet Plan',                   'Alok',         'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('Byob',                           'Alok',         'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('Pray',                           'Alok',         'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('Bella Ciao (Feat. Andre Sarate)','Alok',         'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('keep it mellow',                 'Marshmellow',  'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('Happier',                        'Marshmellow',  'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('FRIENDS',						 'Marshmellow',  'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('Alone',							 'Marshmellow',  'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('Gravity',						 'Cat dealers',  'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('Your Body',						 'Cat dealers',  'Eletronica',   Rand(240) + 68,3.50,1)
-insert into Musica values ('Sunshine',						 'Cat dealers',  'Eletronica',   Rand(240) + 68,3.50,1)
-
-
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo])
-     VALUES
-           ('Voce Vai Ver','Zeze Di Camargo e Luciano','Sertanejo',68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
-GO
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo])
-     VALUES
-           ('E O Amor','Zeze Di Camargo e Luciano','Sertanejo',68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
-GO
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo])
-     VALUES
-           ('Dois Coracoes E Uma Historia','Zeze Di Camargo e Luciano','Sertanejo',68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
-GO
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo])
-     VALUES
-           ('Indiferenca','Zeze Di Camargo e Luciano','Sertanejo',68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
-GO
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo])
-     VALUES
-           ('Flores em Vida','Zeze Di Camargo e Luciano','Sertanejo',68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
-GO
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo])
-     VALUES
-           ('Cada Volta e Um Recomeco','Zeze Di Camargo e Luciano','Sertanejo',68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
-GO
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo])
-     VALUES
-           ('Sera Que Foi Saudade','Zeze Di Camargo e Luciano','Sertanejo',68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
-GO
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo])
-     VALUES
-           ('No Dia Em Que Eu Sai de Casa','Zeze Di Camargo e Luciano','Sertanejo',68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
-GO
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo])
-     VALUES
-           ('Pra Mudar Minha Vida','Zeze Di Camargo e Luciano','Sertanejo',68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
-GO
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo])
-     VALUES
-           ('Pao de Mel','Zeze Di Camargo e Luciano','Sertanejo',68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
-GO
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo])
-     VALUES
-           ('Preciso de Voce','Zeze Di Camargo e Luciano','Sertanejo',68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
-GO
-
-INSERT INTO [poo1913].[Musica] ([Titulo],[Cantor],[Estilo],[Duracao],[Preco],[Ativo])
-     VALUES
-           ('Evidencias','Zeze Di Camargo e Luciano','Sertanejo',68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
-GO
-
+INSERT INTO Musica VALUES ('Numb',                           'Linkin park',  		     'Rock',        68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('In the End',                     'Linkin park',  		     'Rock',        68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Castle of Glass',                'Linkin park',  		     'Rock',        68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('What i have done ',              'Linkin park',  		     'Rock',        68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Burn it down',                   'Linkin park',  		     'Rock',        68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('New Divide',                     'Linkin park',  		     'Rock',        68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Crawling',			             'Linkin park',  		     'Rock',        68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Lost in the echo',               'Linkin park',  		     'Rock',        68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Breaking the habit',             'Linkin park',  		     'Rock',        68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('One more light',                 'Linkin park',  		     'Rock',        68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('The Unforgiven',                 'Metallica',    		     'Heavy Metal', 68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('The Unforgiven II',              'Metallica',    		     'Heavy Metal', 68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('The Unforgiven III',             'Metallica',    		     'Heavy Metal', 68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('One',                            'Metallica',    		     'Heavy Metal', 68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Nothing Else Matters',           'Metallica',    		     'Heavy Metal', 68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Hero of the day',                'Metallica',    		     'Heavy Metal', 68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Turn the Page',                  'Metallica',    		     'Heavy Metal', 68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Enter Sandman',                  'Metallica',    		     'Heavy Metal', 68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Danado de Bom',                  'Luis Gonzaga', 		     'Forro',       68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('O Sanfoneiro do povo de Deus',   'Luis Gonzaga', 		     'Forro',       68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Sanfoneiro Macho',               'Luis Gonzaga', 		     'Forro',       68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Quadrilhas e marchinhas juninas','Luis Gonzaga', 		     'Forro',       68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Volta pra curtir ao vivo',       'Luis Gonzaga', 		     'Forro',       68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Aquilo Bom',                     'Luis Gonzaga', 		     'Forro',       68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Eterno cantador',                'Luis Gonzaga', 		     'Forro',       68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Fuego',                          'Alok',         		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Hear Me Now',                    'Alok',         		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('All the Lies',                   'Alok',         		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Ocean',                          'Alok',         		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Big jet Plan',                   'Alok',         		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Byob',                           'Alok',         		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Pray',                           'Alok',         		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Bella Ciao (Feat. Andre Sarate)','Alok',         		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('keep it mellow',                 'Marshmellow',  		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Happier',                        'Marshmellow',  		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('FRIENDS',			             'Marshmellow',  		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Alone',			                 'Marshmellow',  		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Gravity',			             'Cat dealers',  		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Your Body',	      		         'Cat dealers',  		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Sunshine',			             'Cat dealers',  		     'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Voce Vai Ver',                   'Zeze Di Camargo e Luciano','Sertanejo',   68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('E O Amor',					     'Zeze Di Camargo e Luciano','Sertanejo',   68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Dois Coracoes E Uma Historia',   'Zeze Di Camargo e Luciano','Sertanejo',   68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Indiferenca',                    'Zeze Di Camargo e Luciano','Sertanejo',   68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Flores em Vida',                 'Zeze Di Camargo e Luciano','Sertanejo',   68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Cada Volta e Um Recomeco',       'Zeze Di Camargo e Luciano','Sertanejo',   68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Sera Que Foi Saudade',           'Zeze Di Camargo e Luciano','Sertanejo',   68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('No Dia Em Que Eu Sai de Casa',   'Zeze Di Camargo e Luciano','Sertanejo',   68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Pra Mudar Minha Vida',           'Zeze Di Camargo e Luciano','Sertanejo',   68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Pao de Mel',                     'Zeze Di Camargo e Luciano','Sertanejo',   68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Preciso de Voce',                'Zeze Di Camargo e Luciano','Sertanejo',   68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Evidencias',                     'Zeze Di Camargo e Luciano','Sertanejo',   68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('I Do - Edited',                  'Chingy',                   'Rap',         68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('See You Again',                  'Wiz Khalifa',              'Pop',         68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Tokyo Drift',                  	 'Teriyaki Boyz',            'Eletronica',  68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
+INSERT INTO Musica VALUES ('Bandolero',                  	 'Don Omar',                 'Pop',         68 + CONVERT(INT, (247-68+1)*RAND()),ROUND(RAND(CHECKSUM(NEWID())) * (100), 2),1)
