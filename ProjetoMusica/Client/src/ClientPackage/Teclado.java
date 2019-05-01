@@ -1,4 +1,4 @@
-package Server;
+package ClientPackage;
 
 import java.io.*;
 
