@@ -3,7 +3,7 @@ package DB;
 import DB.Util.*;
 
 public class Server {
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		if (args.length > 1) {
 			System.err.println("Uso esperado: java Servidor [PORTA]\n");
 			return;
@@ -18,6 +18,7 @@ public class Server {
 
 		AceitadoraDeConexao aceitadoraDeConexao = null;
 		try {
+			System.out.println("passei aqui");
 			aceitadoraDeConexao = new AceitadoraDeConexao(porta, usuarios);
 			aceitadoraDeConexao.start();
 
@@ -38,15 +39,15 @@ public class Server {
 			}
 
 			if (comando.toLowerCase().equals("desativar")) {
-				synchronized (usuarios) {
-					for (Parceiro usuario : usuarios.values()) {
-						try {
-							usuario.receba(new Comunicado("FIM"));
-							usuario.adeus();
-						} catch (Exception erro) {
-						}
-					}
-				}
+//				synchronized (usuarios) {
+//					for (Parceiro usuario : usuarios.values()) {
+//						try {
+//							usuario.receba(new Comunicado("FIM"));
+//							usuario.adeus();
+//						} catch (Exception erro) {
+//						}
+//					}
+//				}
 
 				System.out.println("O servidor foi desativado!\n");
 				System.exit(0);

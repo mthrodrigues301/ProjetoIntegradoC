@@ -1,7 +1,6 @@
 package DB.Util;
 
 import java.net.*;
-import java.util.*;
 
 public class AceitadoraDeConexao extends Thread {
 	private ServerSocket pedido;
@@ -25,16 +24,19 @@ public class AceitadoraDeConexao extends Thread {
 			Socket conexao = null;
 			try {
 				conexao = this.pedido.accept();
+				System.out.println(conexao);
 			} catch (Exception erro) {
 				continue;
 			}
 
-			SupervisoraDeConexao supervisoraDeConexao = null;
-			try {
-				supervisoraDeConexao = new SupervisoraDeConexao(conexao, usuarios);
-			} catch (Exception erro) {
-			} // sei que passei parametros corretos para o construtor
-			supervisoraDeConexao.start();
+			System.out.println(conexao);
+//			
+//			SupervisoraDeConexao supervisoraDeConexao = null;
+//			try {
+//				supervisoraDeConexao = new SupervisoraDeConexao(conexao, usuarios);
+//			} catch (Exception erro) {
+//			} // sei que passei parametros corretos para o construtor
+//			supervisoraDeConexao.start();
 		}
 	}
 }

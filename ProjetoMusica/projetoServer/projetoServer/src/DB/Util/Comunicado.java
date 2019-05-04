@@ -1,7 +1,6 @@
 package DB.Util;
 
 import java.io.Serializable;
-import DB.*;
 
 public class Comunicado implements Serializable {
 	private String comando, complemento1, complemento2, complemento3, complemento4, complemento5;
