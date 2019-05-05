@@ -7,11 +7,16 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Client.Util.Comunicado;
 import Client.Util.Parceiro;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class JanelaDeMusicas extends JFrame {
 
@@ -19,13 +24,13 @@ public class JanelaDeMusicas extends JFrame {
 	private JTextField txtCategoria;
 	private JTextField txtPesquisa;
 	private Parceiro servidor;
+	private JButton btnPesquisar;
 
 	public JanelaDeMusicas(Parceiro servidor) throws Exception {
-System.out.println("toaqui na janela");
 		if (servidor == null)
 			throw new Exception("Servidor indisponivel");
 
-		this.servidor = servidor;
+//		this.servidor = servidor;
 
 		setTitle("Loja DuMa Musica");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,7 +50,28 @@ System.out.println("toaqui na janela");
 		contentPane.add(txtPesquisa);
 		txtPesquisa.setColumns(10);
 
-		JButton btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar = new JButton("Pesquisar");
+		btnPesquisar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+
+				boolean comunicadoOk = true;
+
+				try {
+					servidor.receba(new Comunicado("COM", txtCategoria.getText(), txtPesquisa.getText()));
+
+					Comunicado comunicado = servidor.envie();
+
+					System.out.println("RESULTADO: " + comunicado.getComando());
+					if (comunicado.getComando().equals("ERR"))
+						comunicadoOk = false;
+
+				} catch (Exception erro) {
+					JOptionPane.showMessageDialog(null/* sem janela mãe */, "Tente novamente mais tarde!",
+							"Erro de conectividade", JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+			}
+		});
 		btnPesquisar.setBounds(115, 101, 203, 25);
 		contentPane.add(btnPesquisar);
 

@@ -8,22 +8,22 @@ public class Comunicado implements Serializable {
 	public Comunicado(String comando, String complemento1, String complemento2, String complemento3,
 			String complemento4, String complemento5) throws Exception {
 
-		if (this.comando == null || comando.equals(""))
+		if (comando == null || comando.equals(""))
 			throw new Exception("Comando ausente");
 
-		if (this.complemento1 == null || complemento1.equals(""))
+		if (complemento1 == null || complemento1.equals(""))
 			throw new Exception("Complemento1 ausente");
 
-		if (this.complemento2 == null || complemento2.equals(""))
+		if (complemento2 == null || complemento2.equals(""))
 			throw new Exception("Complemento2 ausente");
 
-		if (this.complemento3 == null || complemento3.equals(""))
+		if (complemento3 == null || complemento3.equals(""))
 			throw new Exception("Complemento3 ausente");
 
-		if (this.complemento4 == null || complemento4.equals(""))
+		if (complemento4 == null || complemento4.equals(""))
 			throw new Exception("Complemento4 ausente");
 
-		if (this.complemento5 == null || complemento5.equals(""))
+		if (complemento5 == null || complemento5.equals(""))
 			throw new Exception("Complemento5 ausente");
 
 		this.comando = comando;
@@ -37,15 +37,15 @@ public class Comunicado implements Serializable {
 	// Construtor de comunicado com 4 complementos
 	public Comunicado(String comando, String complemento1, String complemento2, String complemento3,
 			String complemento4) throws Exception {
-		if (this.comando == null || comando.equals(""))
+		if (comando == null || comando.equals(""))
 			throw new Exception("Comando ausente");
-		if (this.complemento1 == null || complemento1.equals(""))
+		if (complemento1 == null || complemento1.equals(""))
 			throw new Exception("Complemento1 ausente");
-		if (this.complemento2 == null || complemento2.equals(""))
+		if (complemento2 == null || complemento2.equals(""))
 			throw new Exception("Complemento2 ausente");
-		if (this.complemento3 == null || complemento3.equals(""))
+		if (complemento3 == null || complemento3.equals(""))
 			throw new Exception("Complemento3 ausente");
-		if (this.complemento4 == null || complemento4.equals(""))
+		if (complemento4 == null || complemento4.equals(""))
 			throw new Exception("Complemento4 ausente");
 
 		this.comando = comando;
@@ -57,13 +57,13 @@ public class Comunicado implements Serializable {
 
 	// Construtor de comunicado com 3 complementos
 	public Comunicado(String comando, String complemento1, String complemento2, String complemento3) throws Exception {
-		if (this.comando == null || comando.equals(""))
+		if (comando == null || comando.equals(""))
 			throw new Exception("Comando ausente");
-		if (this.complemento1 == null || complemento1.equals(""))
+		if (complemento1 == null || complemento1.equals(""))
 			throw new Exception("Complemento1 ausente");
-		if (this.complemento2 == null || complemento2.equals(""))
+		if (complemento2 == null || complemento2.equals(""))
 			throw new Exception("Complemento2 ausente");
-		if (this.complemento3 == null || complemento3.equals(""))
+		if (complemento3 == null || complemento3.equals(""))
 			throw new Exception("Complemento3 ausente");
 		this.comando = comando;
 		this.complemento1 = complemento1;
@@ -73,11 +73,11 @@ public class Comunicado implements Serializable {
 
 	// Construtor de comunicado com 2 complementos
 	public Comunicado(String comando, String complemento1, String complemento2) throws Exception {
-		if (this.comando == null || comando.equals(""))
+		if (comando == null || comando.equals(""))
 			throw new Exception("Comando ausente");
-		if (this.complemento1 == null || complemento1.equals(""))
+		if (complemento1 == null || complemento1.equals(""))
 			throw new Exception("Complemento1 ausente");
-		if (this.complemento2 == null || complemento2.equals(""))
+		if (complemento2 == null || complemento2.equals(""))
 			throw new Exception("Complemento2 ausente");
 		this.comando = comando;
 		this.complemento1 = complemento1;
@@ -86,9 +86,9 @@ public class Comunicado implements Serializable {
 
 	// Construtor de comunicado com 1 complementos
 	public Comunicado(String comando, String complemento1) throws Exception {
-		if (this.comando == null || comando.equals(""))
+		if (comando == null || comando.equals(""))
 			throw new Exception("Comando ausente");
-		if (this.complemento1 == null || complemento1.equals(""))
+		if (complemento1 == null || complemento1.equals(""))
 			throw new Exception("Complemento1 ausente");
 		this.comando = comando;
 		this.complemento1 = complemento1;
@@ -96,7 +96,7 @@ public class Comunicado implements Serializable {
 
 	// Construtor de comunicado com sem complementos
 	public Comunicado(String comando) throws Exception {
-		if (this.comando == null || comando.equals(""))
+		if (comando == null || comando.equals(""))
 			throw new Exception("Comando ausente");
 		this.comando = comando;
 	}

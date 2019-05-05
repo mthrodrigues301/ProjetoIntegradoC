@@ -8,7 +8,9 @@ public class Parceiro {
 	private ObjectInputStream receptor;
 	private ObjectOutputStream transmissor;
 
-	public Parceiro(Socket conexao, ObjectInputStream receptor, ObjectOutputStream transmissor) throws Exception //se o parrametro nulos
+	public Parceiro(Socket conexao, ObjectInputStream receptor, ObjectOutputStream transmissor) throws Exception // se o
+																													// parrametro
+																													// nulos
 	{
 		if (conexao == null)
 			throw new Exception("Conexao ausente");
@@ -43,9 +45,9 @@ public class Parceiro {
 
 	public void adeus() throws Exception {
 		try {
-			this.transmissor.close();
-			this.receptor.close();
-			this.conexao.close();
+//			this.transmissor.close();
+//			this.receptor.close();
+//			this.conexao.close();
 		} catch (Exception erro) {
 			throw new Exception("Erro de desconexao");
 		}

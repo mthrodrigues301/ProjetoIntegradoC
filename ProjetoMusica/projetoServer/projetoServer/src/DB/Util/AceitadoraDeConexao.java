@@ -30,13 +30,13 @@ public class AceitadoraDeConexao extends Thread {
 			}
 
 			System.out.println(conexao);
-//			
-//			SupervisoraDeConexao supervisoraDeConexao = null;
-//			try {
-//				supervisoraDeConexao = new SupervisoraDeConexao(conexao, usuarios);
-//			} catch (Exception erro) {
-//			} // sei que passei parametros corretos para o construtor
-//			supervisoraDeConexao.start();
+			
+			SupervisoraDeConexao supervisoraDeConexao = null;
+			try {
+				supervisoraDeConexao = new SupervisoraDeConexao(conexao, usuarios);
+			} catch (Exception erro) {
+			} // sei que passei parametros corretos para o construtor
+			supervisoraDeConexao.start();
 		}
 	}
 }
