@@ -5,7 +5,6 @@ import java.net.*;
 import javax.swing.*;
 
 import Client.Util.*;
-import Client.View.JanelaDeCompras;
 import Client.View.JanelaDeMusicas;
 import Helper.Comunicado;
 
