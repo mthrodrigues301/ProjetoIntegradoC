@@ -83,16 +83,9 @@ public class Musica implements Cloneable, Comparable<Musica> {
 	}
 
 	public String toString() {
-		int duracao = this.duracao / 60;
-		int minutos = 0, segundos = 0;
-		if (duracao > 1) {
-			segundos = this.duracao % 60;
-		} else {
-			minutos = duracao;
-		}
-
-		return "Musica: " + this.titulo + " Artista: " + this.artista + " Estilo: " + this.estilo + " Duração: "
-				+ minutos  + ":" + segundos + " Preço R$: " + this.preco;
+		return (this.duracao / 60 < 10 ? "0" : "") + this.duracao / 60 + ":" + (this.duracao % 60 < 10 ? "0" : "")
+				+ this.duracao % 60 + " " + this.titulo + " - " + this.artista + " - " + this.estilo + "   R$: "
+				+ this.preco;
 	}
 
 	public boolean equals(Object obj) {

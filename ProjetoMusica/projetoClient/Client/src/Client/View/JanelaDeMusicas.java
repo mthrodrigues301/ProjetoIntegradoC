@@ -2,21 +2,28 @@ package Client.View;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollBar;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
 import Client.Util.*;
 import Helper.*;
 
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.event.ActionListener;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JList;
+import javax.swing.SwingConstants;
+import javax.swing.JLayeredPane;
 
 public class JanelaDeMusicas extends JFrame {
 
@@ -26,12 +33,19 @@ public class JanelaDeMusicas extends JFrame {
 	private JButton btnPesquisar;
 	private JComboBox<String> cmbCategoria;
 	private Lista<Musica> musicas;
-	private JList<String> list;
+	private JList<String> listMusicas;
+	private JList<String> listCarrinho;
+	private JButton Remover;
+
+	// MODEL
+	private DefaultListModel<String> dmMusicas = new DefaultListModel<String>();
+	private DefaultListModel<String> dmCarrinho = new DefaultListModel<String>();
 
 	public JanelaDeMusicas(Parceiro servidor) throws Exception {
 		if (servidor == null) {
 			JOptionPane.showMessageDialog(null/* sem janela mãe */, "Tente novamente mais tarde!",
 					"Servidor indisponivel", JOptionPane.ERROR_MESSAGE);
+			return;
 		}
 
 		this.servidor = servidor;
@@ -62,7 +76,7 @@ public class JanelaDeMusicas extends JFrame {
 				String estilo = comunicado.getComplemento1();
 
 				if (estilo != null)
-					cmbCategoria.addItem(estilo);
+					this.cmbCategoria.addItem(estilo);
 			}
 
 //			for (;;) {
@@ -91,9 +105,6 @@ public class JanelaDeMusicas extends JFrame {
 				try {
 					String Categoria = (String) cmbCategoria.getSelectedItem();
 					String pesquisa = txtPesquisa.getText();
-					if (pesquisa == null) {
-						pesquisa = "";
-					}
 
 					servidor.receba(new Comunicado("CON", Categoria, pesquisa));
 
@@ -105,12 +116,12 @@ public class JanelaDeMusicas extends JFrame {
 								comunicado.getComplemento3(), Integer.parseInt(comunicado.getComplemento4()),
 								Double.parseDouble(comunicado.getComplemento5())));
 						LoadList();
-						
+
 						return;
 					}
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null/* sem janela mãe */, "Tente novamente mais tarde!",
-							ex.getMessage(), JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null/* sem janela mãe */, ex.getMessage(), "Erro!",
+							JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -126,13 +137,76 @@ public class JanelaDeMusicas extends JFrame {
 		lblPesquisa.setBounds(140, 29, 56, 16);
 		contentPane.add(lblPesquisa);
 
-		list = new JList<String>();
-		list.setBounds(12, 133, 646, 246);
-		contentPane.add(list);
+		this.listMusicas = new JList<String>();
+		this.listMusicas.setBounds(12, 109, 264, 246);
+		this.listMusicas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		contentPane.add(this.listMusicas);
 
 		JLabel lblMusicas = new JLabel("Musicas");
-		lblMusicas.setBounds(12, 104, 56, 16);
+		lblMusicas.setBounds(12, 92, 56, 16);
 		contentPane.add(lblMusicas);
+
+		JButton btnFinalizarCompra = new JButton("Finalizar Compra");
+		btnFinalizarCompra.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		btnFinalizarCompra.setBounds(482, 366, 176, 23);
+		contentPane.add(btnFinalizarCompra);
+
+		JButton btnAdicionar = new JButton("Adicionar");
+		btnAdicionar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (listMusicas == null)
+						throw new Exception("Sem itens na lista de Musicas, faça uma pesquisa!");
+
+					if (listMusicas.getSelectedValue() == null)
+						throw new Exception("Selecione uma musica para adicionar ao carrinho!");
+
+					dmCarrinho.addElement(listMusicas.getSelectedValue());
+					listCarrinho.setModel(dmCarrinho);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null/* sem janela mãe */, ex.getMessage(), "Erro!",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		btnAdicionar.setToolTipText("Adicionar ao carrinho");
+		btnAdicionar.setBounds(286, 154, 98, 38);
+		contentPane.add(btnAdicionar);
+
+		this.listCarrinho = new JList<String>();
+		this.listCarrinho.setBounds(394, 109, 264, 246);
+		this.listCarrinho.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+		contentPane.add(this.listCarrinho);
+
+		JLabel lblCarrinho = new JLabel("Carrinho");
+		lblCarrinho.setBounds(394, 93, 70, 14);
+		contentPane.add(lblCarrinho);
+
+		Remover = new JButton("Remover");
+		Remover.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					if (listCarrinho == null)
+						throw new Exception("Sem itens na lista de Carrinho!");
+
+					int index = listCarrinho.getSelectedIndex();
+
+					if (index < 0)
+						throw new Exception("Selecione uma musica para remover do Carrinho!");
+
+					dmCarrinho.removeElementAt(index);
+				} catch (Exception ex) {
+					JOptionPane.showMessageDialog(null/* sem janela mãe */, ex.getMessage(), "Erro!",
+							JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		Remover.setToolTipText("Remover ao carrinho");
+		Remover.setBounds(286, 243, 98, 38);
+		contentPane.add(Remover);
 
 		this.setLocationRelativeTo(null);
 
@@ -141,14 +215,18 @@ public class JanelaDeMusicas extends JFrame {
 
 	private void LoadList() {
 		try {
-			DefaultListModel<String> DLM = new DefaultListModel<String>();
-			while (!this.musicas.isVazia()) {
-				DLM.addElement(this.musicas.getItem().toString());
-				this.musicas.removeItem();
+			if (!this.musicas.isVazia()) {
+				this.listMusicas.removeAll();
+				this.dmMusicas = new DefaultListModel<String>();
+
+				while (!this.musicas.isVazia()) {
+					this.dmMusicas.addElement(this.musicas.getItem().toString());
+					this.musicas.removeItem();
+				}
+				this.listMusicas.setModel(this.dmMusicas);
 			}
-			list.setModel(DLM);
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null/* sem janela mãe */, "Tente novamente mais tarde!", ex.getMessage(),
+			JOptionPane.showMessageDialog(null/* sem janela mãe */, ex.getMessage(), "Erro!",
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}

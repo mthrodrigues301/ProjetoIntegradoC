@@ -40,7 +40,7 @@ public class Server {
 
 			if (comando.toLowerCase().equals("desativar")) {
 //				synchronized (usuarios) {
-//					for (Parceiro usuario : usuarios.values()) {
+//					for (Parceiro usuario : usuarios.getItem()) {
 //						try {
 //							usuario.receba(new Comunicado("FIM"));
 //							usuario.adeus();
