@@ -1,3 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <section name="Workbench">
+	<list key="org.eclipse.ui.internal.wizards.datatransfer.SmartImportRootWizardPage.knownSources">
+		<item value="C:\Users\mathe\Desktop\ProjetoIntegradoC\ProjetoMusica"/>
+		<item value="C:\Users\mathe\Desktop\ProjetoIntegradoC\ProjetoMusica\projetoClient"/>
+		<item value="C:\Users\mathe\Desktop\ProjetoIntegradoC\ProjetoMusica\projetoClient\Client"/>
+	</list>
 </section>

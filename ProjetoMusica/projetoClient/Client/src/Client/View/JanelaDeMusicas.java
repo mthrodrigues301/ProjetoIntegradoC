@@ -36,6 +36,7 @@ public class JanelaDeMusicas extends JFrame {
 	private JList<String> listMusicas;
 	private JList<String> listCarrinho;
 	private JButton Remover;
+	private Comunicado comunicado;
 
 	// MODEL
 	private DefaultListModel<String> dmMusicas = new DefaultListModel<String>();
@@ -68,31 +69,19 @@ public class JanelaDeMusicas extends JFrame {
 		contentPane.add(cmbCategoria);
 
 		try {
-			this.servidor.receba(new Comunicado("CMB"));
+			servidor.receba(new Comunicado("CMB"));
+			this.cmbCategoria.addItem("Todas");
 
-			Comunicado comunicado = this.servidor.envie();
+			for (;;) {
+				comunicado = servidor.envie();
+				if (comunicado.getComando().equals("FIC") || comunicado.getComando().equals("ERR"))
+					break;
 
-			if (comunicado.getComando().equals("EST")) {
-				String estilo = comunicado.getComplemento1();
-
+				System.out.println(comunicado.toString());
+				String estilo = comunicado.getComplemento3();
 				if (estilo != null)
 					this.cmbCategoria.addItem(estilo);
 			}
-
-//			for (;;) {
-//				Comunicado comunicado = servidor.envie();
-//
-//				if (comunicado == null || comunicado.getComando().equals("FIM"))
-//					break;
-//				else if (comunicado.getComando().equals("EST")) {
-//					String estilo = comunicado.getComplemento1();
-//
-//					if (estilo != null) {
-//						cmbCategoria.addItem(estilo);
-////						break;
-//					}
-//				}
-//			}
 		} catch (Exception erro) {
 			JOptionPane.showMessageDialog(null/* sem janela mãe */, "Tente novamente mais tarde!",
 					"Erro de conectividade", JOptionPane.ERROR_MESSAGE);
@@ -103,22 +92,29 @@ public class JanelaDeMusicas extends JFrame {
 		btnPesquisar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String Categoria = (String) cmbCategoria.getSelectedItem();
-					String pesquisa = txtPesquisa.getText();
+					String combo = cmbCategoria.getSelectedItem().toString();
+					String pesq = txtPesquisa.getText();
+					if (combo.equals("Todas")) {
+						combo = "TODAS";
+						pesq = "VAZIO";
+					} else if (txtPesquisa.getText() == "") {
+						pesq = "VAZIO";
+					}
+					servidor.receba(new Comunicado("CON", combo, pesq));
+					musicas = new Lista<Musica>();
+					for (;;) {
+						comunicado = servidor.envie();
+						if (comunicado.getComando().equals("FIC") || comunicado.getComando().equals("ERR"))
+							break;
 
-					servidor.receba(new Comunicado("CON", Categoria, pesquisa));
+						System.out.println(comunicado.toString());
 
-					Comunicado comunicado = servidor.envie();
-
-					if (!comunicado.getComando().equals("ERR")) {
-						musicas = new Lista<Musica>();
 						musicas.insereItem(new Musica(comunicado.getComplemento1(), comunicado.getComplemento2(),
 								comunicado.getComplemento3(), Integer.parseInt(comunicado.getComplemento4()),
 								Double.parseDouble(comunicado.getComplemento5())));
-						LoadList();
-
-						return;
 					}
+
+					LoadList();
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null/* sem janela mãe */, ex.getMessage(), "Erro!",
 							JOptionPane.ERROR_MESSAGE);

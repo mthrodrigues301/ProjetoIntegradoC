@@ -1,10 +1,10 @@
 package DB.Util;
 
 import java.io.*;
+import DB.DAOS.*;
+import DB.DBO.*;
 import java.net.*;
 import java.util.*;
-
-import DB.DAOS.Musicas;
 import DB.DBO.Musica;
 import Helper.Comunicado;
 
@@ -13,8 +13,7 @@ public class SupervisoraDeConexao extends Thread {
 	private Parceiro usuario;
 	private Socket conexao;
 	private Lista<Parceiro> usuarios;
-	private Lista<String> estilos;
-	private Lista<Comunicado> comunicados;
+	private Lista<Musica> musicas;
 //	private HashMap<String, Parceiro> usuarios;
 
 	public SupervisoraDeConexao(Socket conexao, Lista<Parceiro> usuarios) throws Exception {
@@ -46,7 +45,7 @@ public class SupervisoraDeConexao extends Thread {
 			try {
 				receptor.close();
 			} catch (Exception falha) {
-			} // so tentando fechar antes de acabar a thread
+			}
 
 			return;
 		}
@@ -54,35 +53,56 @@ public class SupervisoraDeConexao extends Thread {
 		try {
 			this.usuario = new Parceiro(this.conexao, receptor, transmissor);
 		} catch (Exception erro) {
-		} // sei que passei os parametros corretos
+		}
 
 		try {
-			comunicados = new Lista<Comunicado>();
 			for (;;) {
+				System.out.println("SupervisoraDeConexao " + conexao + usuarios);
 				Comunicado comunicado = this.usuario.envie();
 
-				if (comunicado == null || comunicado.getComando().equals("FIM")) {
-					this.usuario.receba(new Comunicado("FIC"));
-					this.usuario.envie();
+				if (comunicado.getComando().equals("CON")) {
+					try {
+						if(comunicado.getComplemento1().equals("TODAS"))
+							musicas = Musicas.getAllMusicas();
+						else if(!comunicado.getComplemento2().equals("VAZIO"))
+							musicas = Musicas.getMusicaPesq(comunicado.getComplemento2());
+						else
+							musicas = Musicas.getMusicaByEstilo(comunicado.getComplemento1());
+						
+						for (int i = 1; i <= musicas.getTamanho(); i++) {
+							usuario.receba(new Comunicado("MUS", musicas.getItem(i).getTitulo(),
+									musicas.getItem(i).getCantor(), musicas.getItem(i).getEstilo(),
+									Double.toString(musicas.getItem(i).getPreco()),
+									Integer.toString(musicas.getItem(i).getDuracao())));
+						}
+					} catch (Exception e) {
+						usuario.receba(new Comunicado("ERR"));
+					}
+					usuario.receba(new Comunicado("FIC"));
+				} else if (comunicado.getComando().equals("CMB")) {
+					try {
+						musicas = Musicas.getEstilo();
+						for (int i = 1; i <= musicas.getTamanho(); i++) {
+							usuario.receba(new Comunicado("MUS", musicas.getItem(i).getTitulo(),
+									musicas.getItem(i).getCantor(), musicas.getItem(i).getEstilo(),
+									Double.toString(musicas.getItem(i).getPreco()),
+									Integer.toString(musicas.getItem(i).getDuracao())));
+						}
+					} catch (Exception e) {
+						usuario.receba(new Comunicado("ERR"));
+					}
+					usuario.receba(new Comunicado("FIC"));
 				}
 
-				if (comunicado.getComando().equals("CMB")) {
-					comunicados = Musicas.getEstilo();
-					this.usuario.receba(comunicados.getItem());
-//					this.usuario.envie();
-//					while (!comunicados.isVazia()) {
-//						this.usuario.receba(comunicados.getItem());
-//						comunicados.removeItem();
-//						this.usuario.envie();
-//					}
-//					this.usuario.receba(new Comunicado("FIM"));
-//					this.usuario.envie();
-				} else if (comunicado.getComando().equals("CON")) {
-					comunicados = Musicas.getMusica(comunicado.getComplemento1(), comunicado.getComplemento2());
-					this.usuario.receba(comunicados.getItem());
-				}
+				if (comunicado == null || !comunicado.getComando().equals("FIC"))
+					return;
+				
+				this.usuario.receba(new Comunicado("ERR"));
 			}
 		} catch (Exception erro) {
+//			if (this.usuarios.get(this.nick) != null)
+//				this.usuarios.remove(this.nick);
+
 			try {
 				transmissor.close();
 				receptor.close();

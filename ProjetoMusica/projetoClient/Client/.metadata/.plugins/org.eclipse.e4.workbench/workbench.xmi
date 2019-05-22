@@ -11,6 +11,7 @@
     <persistedState key="workingSets" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;workingSets/>"/>
     <persistedState key="aggregateWorkingSetId" value="Aggregate for window 1557541023432"/>
     <tags>topLevel</tags>
+    <tags>shellMaximized</tags>
     <children xsi:type="basic:PartSashContainer" xmi:id="_3BYBwHOSEemEFK2c7RTeag" selectedElement="_3BYBwnOSEemEFK2c7RTeag" horizontal="true">
       <children xsi:type="advanced:PerspectiveStack" xmi:id="_3BYBwXOSEemEFK2c7RTeag" elementId="org.eclipse.ui.ide.perspectivestack" containerData="7500" selectedElement="_3QKEoHOSEemEFK2c7RTeag">
         <children xsi:type="advanced:Perspective" xmi:id="_3QKEoHOSEemEFK2c7RTeag" elementId="org.eclipse.jdt.ui.JavaPerspective" selectedElement="_3QKrsHOSEemEFK2c7RTeag" label="Java" iconURI="platform:/plugin/org.eclipse.jdt.ui/$nl$/icons/full/eview16/jperspective.png">
@@ -78,7 +79,6 @@
             <children xsi:type="basic:PartSashContainer" xmi:id="_3QKrsXOSEemEFK2c7RTeag" containerData="2500" selectedElement="_3QKrsnOSEemEFK2c7RTeag">
               <children xsi:type="basic:PartStack" xmi:id="_3QKrsnOSEemEFK2c7RTeag" elementId="left" containerData="6000" selectedElement="_3QKrs3OSEemEFK2c7RTeag">
                 <tags>org.eclipse.e4.primaryNavigationStack</tags>
-                <tags>noFocus</tags>
                 <children xsi:type="advanced:Placeholder" xmi:id="_3QKrs3OSEemEFK2c7RTeag" elementId="org.eclipse.jdt.ui.PackageExplorer" ref="_3P_skHOSEemEFK2c7RTeag" closeable="true">
                   <tags>View</tags>
                   <tags>categoryTag:Java</tags>
@@ -209,8 +209,8 @@
       <persistedState key="memento" value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?>&#xD;&#xA;&lt;view>&#xD;&#xA;&lt;presentation currentPage=&quot;qroot&quot; restore=&quot;true&quot;/>&#xD;&#xA;&lt;standbyPart/>&#xD;&#xA;&lt;/view>"/>
       <tags>View</tags>
       <tags>categoryTag:General</tags>
-      <tags>active</tags>
       <tags>activeOnClose</tags>
+      <tags>active</tags>
       <menus xmi:id="_3r924HOSEemEFK2c7RTeag" elementId="org.eclipse.ui.internal.introview">
         <tags>ViewMenu</tags>
         <tags>menuContribution:menu</tags>
@@ -380,7 +380,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_3CxI4HOSEemEFK2c7RTeag" elementId="org.eclipse.ui.workbench.file">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_3C5EsHOSEemEFK2c7RTeag" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_21SHAnOSEemEFK2c7RTeag"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_T1nq4HwzEemUycIEbhZuuA" elementId="print" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/print_edit.png" tooltip="Print" command="_21SHAnOSEemEFK2c7RTeag"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_3CxI4XOSEemEFK2c7RTeag" elementId="group.edit" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -408,7 +408,7 @@
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_3Cxv8HOSEemEFK2c7RTeag" elementId="org.eclipse.ui.workbench.navigate">
         <tags>Draggable</tags>
-        <children xsi:type="menu:HandledToolItem" xmi:id="_3C6S0XOSEemEFK2c7RTeag" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_21SGuXOSEemEFK2c7RTeag"/>
+        <children xsi:type="menu:HandledToolItem" xmi:id="_T1qHInwzEemUycIEbhZuuA" elementId="org.eclipse.ui.window.pinEditor" visible="false" iconURI="platform:/plugin/org.eclipse.ui/icons/full/etool16/pin_editor.png" tooltip="Pin Editor" type="Check" command="_21SGuXOSEemEFK2c7RTeag"/>
       </children>
       <children xsi:type="menu:ToolBar" xmi:id="_3Cxv8XOSEemEFK2c7RTeag" elementId="group.editor" toBeRendered="false">
         <tags>toolbarSeparator</tags>
@@ -1529,7 +1529,7 @@
   <commands xmi:id="_21OcW3OSEemEFK2c7RTeag" elementId="org.eclipse.jdt.debug.ui.commands.InstanceCount" commandName="Instance Count" description="View the instance count of the selected type loaded in the target VM" category="_21MnCHOSEemEFK2c7RTeag"/>
   <commands xmi:id="_21OcXHOSEemEFK2c7RTeag" elementId="org.eclipse.ui.edit.findReplace" commandName="Find and Replace" description="Find and replace text" category="_21Mm8XOSEemEFK2c7RTeag"/>
   <commands xmi:id="_21OcXXOSEemEFK2c7RTeag" elementId="org.eclipse.egit.ui.team.MergeTool" commandName="Merge Tool" category="_21MnC3OSEemEFK2c7RTeag"/>
-  <commands xmi:id="_21OcXnOSEemEFK2c7RTeag" elementId="org.eclipse.pde.ui.addAllPluginsToJavaSearch" commandName="Add All Plug-ins to Java Search" description="Adds all plug-ins in the target platform to java search" category="_21MnFHOSEemEFK2c7RTeag"/>
+  <commands xmi:id="_21OcXnOSEemEFK2c7RTeag" elementId="org.eclipse.pde.ui.addAllPluginsToJavaSearch" commandName="Add All Plug-ins to Java Workspace Scope" description="Adds all plug-ins in the target platform to Java workspace scope" category="_21MnFHOSEemEFK2c7RTeag"/>
   <commands xmi:id="_21PDMHOSEemEFK2c7RTeag" elementId="org.eclipse.egit.ui.command.shareProject" commandName="Share with Git" description="Share the project using Git" category="_21MnFHOSEemEFK2c7RTeag">
     <parameters xmi:id="_21PDMXOSEemEFK2c7RTeag" elementId="org.eclipse.egit.ui.command.projectNameParameter" name="Project" optional="false"/>
   </commands>
@@ -2425,6 +2425,7 @@
   <commands xmi:id="_3A-ZJnOSEemEFK2c7RTeag" elementId="AUTOGEN:::org.eclipse.mylyn.tasks.ui.actions.view/org.eclipse.mylyn.doc.legend.show.action" commandName="Show UI Legend" description="Show Tasks UI Legend" category="_21MnFHOSEemEFK2c7RTeag"/>
   <commands xmi:id="_3A_AMHOSEemEFK2c7RTeag" elementId="AUTOGEN:::org.eclipse.mylyn.tasks.ui.actions.view/org.eclipse.mylyn.context.ui.actions.tasklist.focus" commandName="Focus on Workweek" description="Focus on Workweek" category="_21MnFHOSEemEFK2c7RTeag"/>
   <commands xmi:id="_3A_AMXOSEemEFK2c7RTeag" elementId="AUTOGEN:::org.eclipse.pde.ui.logViewActions/org.eclipse.jdt.debug.ui.LogViewActions.showStackTrace" commandName="Show Stack Trace in Console View" description="Show Stack Trace in Console View" category="_21MnFHOSEemEFK2c7RTeag"/>
+  <commands xmi:id="_-vp9wXwyEemqcJbwhzjBiQ" elementId="org.eclipse.egit.ui.RepositoriesViewShowInSystemExplorer" commandName="Show In System Explorer" category="_21MnC3OSEemEFK2c7RTeag"/>
   <addons xmi:id="_200zi3OSEemEFK2c7RTeag" elementId="org.eclipse.e4.core.commands.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.core.commands/org.eclipse.e4.core.commands.CommandServiceAddon"/>
   <addons xmi:id="_200zjHOSEemEFK2c7RTeag" elementId="org.eclipse.e4.ui.contexts.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.services/org.eclipse.e4.ui.services.ContextServiceAddon"/>
   <addons xmi:id="_200zjXOSEemEFK2c7RTeag" elementId="org.eclipse.e4.ui.bindings.service" contributorURI="platform:/plugin/org.eclipse.platform" contributionURI="bundleclass://org.eclipse.e4.ui.bindings/org.eclipse.e4.ui.bindings.BindingServiceAddon"/>

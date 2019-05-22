@@ -6,9 +6,7 @@ public class Musica implements Cloneable, Comparable<Musica> {
 	private String titulo, cantor, estilo;
 	private double preco;
 
-	public static boolean valida(int id, String titulo, String cantor, String estilo, int duracao, double preco) {
-		if (id < 0)
-			return false;
+	public static boolean valida(String titulo, String cantor, String estilo, int duracao, double preco) {
 		if (titulo == null || titulo.length() > 80)
 			return false;
 		if (cantor == null || cantor.length() > 60)
@@ -23,11 +21,10 @@ public class Musica implements Cloneable, Comparable<Musica> {
 		return true;
 	}
 
-	public Musica(int id, String titulo, String cantor, String estilo, int duracao, double preco) throws Exception {
-		if (!Musica.valida(id, titulo, cantor, estilo, duracao, preco))
+	public Musica(String titulo, String cantor, String estilo, int duracao, double preco) throws Exception {
+		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
 			throw new Exception("Musica Invalida!");
 
-		this.id = id;
 		this.duracao = duracao;
 		this.titulo = titulo;
 		this.cantor = cantor;
@@ -40,7 +37,7 @@ public class Musica implements Cloneable, Comparable<Musica> {
 	}
 
 	public void setId(int id) throws Exception {
-		if (!Musica.valida(id, titulo, cantor, estilo, duracao, preco))
+		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
 			throw new Exception("ID Invalido!");
 		this.id = id;
 	}
@@ -50,17 +47,17 @@ public class Musica implements Cloneable, Comparable<Musica> {
 	}
 
 	public void setTitulo(String titulo) throws Exception {
-		if (!Musica.valida(id, titulo, cantor, estilo, duracao, preco))
+		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
 			throw new Exception("Titulo Invalido!");
 		this.titulo = titulo;
 	}
 
-	public String getcantor() {
+	public String getCantor() {
 		return cantor;
 	}
 
-	public void setcantor(String cantor) throws Exception {
-		if (!Musica.valida(id, titulo, cantor, estilo, duracao, preco))
+	public void setCantor(String cantor) throws Exception {
+		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
 			throw new Exception("cantor Invalido!");
 		this.cantor = cantor;
 	}
@@ -70,7 +67,7 @@ public class Musica implements Cloneable, Comparable<Musica> {
 	}
 
 	public void setEstilo(String estilo) throws Exception {
-		if (!Musica.valida(id, titulo, cantor, estilo, duracao, preco))
+		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
 			throw new Exception("Estilo Invalido");
 		this.estilo = estilo;
 	}
@@ -80,7 +77,7 @@ public class Musica implements Cloneable, Comparable<Musica> {
 	}
 
 	public void setDuracao(int duracao) throws Exception {
-		if (!Musica.valida(id, titulo, cantor, estilo, duracao, preco))
+		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
 			throw new Exception("Duracao Invalida");
 		this.duracao = duracao;
 	}
@@ -90,7 +87,7 @@ public class Musica implements Cloneable, Comparable<Musica> {
 	}
 
 	public void setPreco(double preco) throws Exception {
-		if (!Musica.valida(id, titulo, cantor, estilo, duracao, preco))
+		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
 			throw new Exception("Preco Invalido!");
 		this.preco = preco;
 	}
@@ -104,7 +101,7 @@ public class Musica implements Cloneable, Comparable<Musica> {
 			segundos = duracao;
 		}
 
-		return "ID: " + this.id + "Musica: " + this.titulo + "\ncantor: " + this.cantor + "\nEstilo: " + this.estilo
+		return "Musica: " + this.titulo + "\ncantor: " + this.cantor + "\nEstilo: " + this.estilo
 				+ "\nDuração: " + minutos + ":" + segundos + "\nPreço R$: " + this.preco;
 	}
 
