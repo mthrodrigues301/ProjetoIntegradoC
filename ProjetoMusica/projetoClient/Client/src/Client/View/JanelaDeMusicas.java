@@ -33,14 +33,16 @@ public class JanelaDeMusicas extends JFrame {
 	private JButton btnPesquisar;
 	private JComboBox<String> cmbCategoria;
 	private Lista<Musica> musicas;
-	private JList<String> listMusicas;
-	private JList<String> listCarrinho;
+	private JList<Musica> listMusicas;
+	private JList<Musica> listCarrinho;
 	private JButton Remover;
 	private Comunicado comunicado;
 
 	// MODEL
-	private DefaultListModel<String> dmMusicas = new DefaultListModel<String>();
-	private DefaultListModel<String> dmCarrinho = new DefaultListModel<String>();
+	private DefaultListModel<Musica> dmMusicas = new DefaultListModel<Musica>();
+	private DefaultListModel<Musica> dmCarrinho = new DefaultListModel<Musica>();
+	private JScrollPane scrollPane;
+	private JScrollPane scrollPane_1;
 
 	public JanelaDeMusicas(Parceiro servidor) throws Exception {
 		if (servidor == null) {
@@ -77,7 +79,6 @@ public class JanelaDeMusicas extends JFrame {
 				if (comunicado.getComando().equals("FIC") || comunicado.getComando().equals("ERR"))
 					break;
 
-				System.out.println(comunicado.toString());
 				String estilo = comunicado.getComplemento3();
 				if (estilo != null)
 					this.cmbCategoria.addItem(estilo);
@@ -94,27 +95,33 @@ public class JanelaDeMusicas extends JFrame {
 				try {
 					String combo = cmbCategoria.getSelectedItem().toString();
 					String pesq = txtPesquisa.getText();
-					if (combo.equals("Todas")) {
+					if (combo.equals("Todas"))
 						combo = "TODAS";
+
+					if (pesq.equals(""))
 						pesq = "VAZIO";
-					} else if (txtPesquisa.getText() == "") {
-						pesq = "VAZIO";
-					}
+
 					servidor.receba(new Comunicado("CON", combo, pesq));
 					musicas = new Lista<Musica>();
 					for (;;) {
 						comunicado = servidor.envie();
-						if (comunicado.getComando().equals("FIC") || comunicado.getComando().equals("ERR"))
-							break;
 
-						System.out.println(comunicado.toString());
+						if (comunicado.getComando().equals("ERR")) {
+							dmCarrinho.clear();
+							dmMusicas.clear();
+							txtPesquisa.setText("");
+							throw new Exception("Erro! Tente novamente mais tarde");
+						}
+
+						if (comunicado.getComando().equals("FIC")) {
+							LoadList();
+							break;
+						}
 
 						musicas.insereItem(new Musica(comunicado.getComplemento1(), comunicado.getComplemento2(),
 								comunicado.getComplemento3(), Integer.parseInt(comunicado.getComplemento4()),
 								Double.parseDouble(comunicado.getComplemento5())));
 					}
-
-					LoadList();
 				} catch (Exception ex) {
 					JOptionPane.showMessageDialog(null/* sem janela mãe */, ex.getMessage(), "Erro!",
 							JOptionPane.ERROR_MESSAGE);
@@ -133,10 +140,13 @@ public class JanelaDeMusicas extends JFrame {
 		lblPesquisa.setBounds(140, 29, 56, 16);
 		contentPane.add(lblPesquisa);
 
-		this.listMusicas = new JList<String>();
-		this.listMusicas.setBounds(12, 109, 264, 246);
+		scrollPane = new JScrollPane();
+		scrollPane.setBounds(12, 109, 264, 246);
+		contentPane.add(scrollPane);
+
+		this.listMusicas = new JList<Musica>();
+		scrollPane.setViewportView(listMusicas);
 		this.listMusicas.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		contentPane.add(this.listMusicas);
 
 		JLabel lblMusicas = new JLabel("Musicas");
 		lblMusicas.setBounds(12, 92, 56, 16);
@@ -172,10 +182,13 @@ public class JanelaDeMusicas extends JFrame {
 		btnAdicionar.setBounds(286, 154, 98, 38);
 		contentPane.add(btnAdicionar);
 
-		this.listCarrinho = new JList<String>();
-		this.listCarrinho.setBounds(394, 109, 264, 246);
+		scrollPane_1 = new JScrollPane();
+		scrollPane_1.setBounds(394, 109, 264, 246);
+		contentPane.add(scrollPane_1);
+
+		this.listCarrinho = new JList<Musica>();
+		scrollPane_1.setViewportView(listCarrinho);
 		this.listCarrinho.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-		contentPane.add(this.listCarrinho);
 
 		JLabel lblCarrinho = new JLabel("Carrinho");
 		lblCarrinho.setBounds(394, 93, 70, 14);
@@ -213,10 +226,10 @@ public class JanelaDeMusicas extends JFrame {
 		try {
 			if (!this.musicas.isVazia()) {
 				this.listMusicas.removeAll();
-				this.dmMusicas = new DefaultListModel<String>();
+				this.dmMusicas = new DefaultListModel<Musica>();
 
 				while (!this.musicas.isVazia()) {
-					this.dmMusicas.addElement(this.musicas.getItem().toString());
+					this.dmMusicas.addElement(this.musicas.getItem());
 					this.musicas.removeItem();
 				}
 				this.listMusicas.setModel(this.dmMusicas);

@@ -62,21 +62,23 @@ public class SupervisoraDeConexao extends Thread {
 
 				if (comunicado.getComando().equals("CON")) {
 					try {
-						if(comunicado.getComplemento1().equals("TODAS"))
-							musicas = Musicas.getAllMusicas();
-						else if(!comunicado.getComplemento2().equals("VAZIO"))
+						if(comunicado.getComplemento1().equals("TODAS") && !comunicado.getComplemento2().equals("VAZIO"))
 							musicas = Musicas.getMusicaPesq(comunicado.getComplemento2());
+						else if(comunicado.getComplemento1().equals("TODAS") && comunicado.getComplemento2().equals("VAZIO"))
+							musicas = Musicas.getAllMusicas();
+						else if(!comunicado.getComplemento1().equals("TODAS") && !comunicado.getComplemento2().equals("VAZIO"))
+							musicas = Musicas.getMusicaByEstiloEPesq(comunicado.getComplemento1(), comunicado.getComplemento2());
 						else
 							musicas = Musicas.getMusicaByEstilo(comunicado.getComplemento1());
 						
 						for (int i = 1; i <= musicas.getTamanho(); i++) {
 							usuario.receba(new Comunicado("MUS", musicas.getItem(i).getTitulo(),
 									musicas.getItem(i).getCantor(), musicas.getItem(i).getEstilo(),
-									Double.toString(musicas.getItem(i).getPreco()),
-									Integer.toString(musicas.getItem(i).getDuracao())));
+									Integer.toString(musicas.getItem(i).getDuracao()),
+									Double.toString(musicas.getItem(i).getPreco())));
 						}
 					} catch (Exception e) {
-						usuario.receba(new Comunicado("ERR"));
+						usuario.receba(new Comunicado("ERR", e.getMessage()));
 					}
 					usuario.receba(new Comunicado("FIC"));
 				} else if (comunicado.getComando().equals("CMB")) {
@@ -94,10 +96,8 @@ public class SupervisoraDeConexao extends Thread {
 					usuario.receba(new Comunicado("FIC"));
 				}
 
-				if (comunicado == null || !comunicado.getComando().equals("FIC"))
-					return;
-				
-				this.usuario.receba(new Comunicado("ERR"));
+				if (comunicado == null || comunicado.getComando().equals("FIC"))
+					this.usuario.receba(new Comunicado("ERR"));
 			}
 		} catch (Exception erro) {
 //			if (this.usuarios.get(this.nick) != null)
