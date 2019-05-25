@@ -7,8 +7,21 @@ import DB.Util.MeuResultSet;
 import DB.Config.*;
 import DB.DBO.Musica;
 
+/**
+ * A Classe DAO Musicas é uma classe que faz as determinadas buscas no banco,
+ *  de acordo com as requisições do usuario.
+ *  
+ *  @author Eduardo Oliveira e Matheus Andrey.
+ */
 public class Musicas {
 	
+	/**
+	 * Método que busca todas as musicas no banco de dados.
+	 *
+	 * @return todas as musicas existentes no banco de dados.
+	 * @throws Exception caso não sejam encontradas musicas,
+	 *  ou ocorra um erro ao conectar-se com o banco de dados.
+	 */
 	public static Lista<Musica> getAllMusicas() throws Exception {
 		Lista<Musica> musicas = new Lista<Musica>();
 		try {
@@ -34,6 +47,15 @@ public class Musicas {
 		return musicas;
 	}
 
+	/**
+	 * Método para a pesquisa de musicas no banco de dados,
+	 *  consultando-as pelo estilo musical desejado.
+	 *
+	 * @param estilo Estilo musical.
+	 * @return Todas as musicas de determinado estilo musical.
+	 * @throws Exception caso não sejam encontradas musicas, 
+	 * ou ocorra um erro ao conectar-se com o banco de dados.
+	 */
 	public static Lista<Musica> getMusicaByEstilo(String estilo) throws Exception {
 		Lista<Musica> musicas = new Lista<Musica>();
 
@@ -63,6 +85,16 @@ public class Musicas {
 		return musicas;
 	}
 	
+	/**
+	 * Método para a pesquisa de musicas no banco de dados, 
+	 *  consultando-as pelo estilo musical e pelas informações de pesquisa.
+	 *
+	 * @param estilo Estilo musical.
+	 * @param pesq Informações para a pesquisa.
+	 * @return Retorna as musicas que condizem com os parametros solicitados.
+	 * @throws Exception caso não sejam encontradas musicas,
+	 *  ou ocorra um erro ao conectar-se com o banco de dados.
+	 */
 	public static Lista<Musica> getMusicaByEstiloEPesq(String estilo, String pesq) throws Exception {
 		Lista<Musica> musicas = new Lista<Musica>();
 
@@ -94,6 +126,15 @@ public class Musicas {
 		return musicas;
 	}
 	
+	/**
+	 * Método para a pesquisa de musicas no banco de dados de acordo com as informações
+	 *  passadas pelo usuário.
+	 *
+	 * @param pesq Informações de pesquisa.
+	 * @return Retorna as musicas que condizem com as informações da pesquisa.
+	 * @throws Exception caso não sejam encontradas musicas,
+	 *  ou ocorra um erro ao conectar-se com o banco de dados.
+	 */
 	public static Lista<Musica> getMusicaPesq(String pesq) throws Exception {
 		Lista<Musica> musicas = new Lista<Musica>();
 
@@ -124,6 +165,13 @@ public class Musicas {
 		return musicas;
 	}
 	
+	/**
+	 * Método para recuperação dos estilos musicais existentes no banco de dados.
+	 *
+	 * @return Estilos musicais perentes no banco de dados.
+	 * @throws Exception caso não sejam encontrados estilos,
+	 *  ou ocorra um erro ao conectar-se com o banco de dados. Exception the exception
+	 */
 	public static Lista<Musica> getEstilo() throws Exception {
 		Lista<Musica> estilos = new Lista<Musica>();
 		try {

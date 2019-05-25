@@ -9,12 +9,10 @@ import DB.DBO.Musica;
 import Helper.Comunicado;
 
 public class SupervisoraDeConexao extends Thread {
-//	private String nick;
 	private Parceiro usuario;
 	private Socket conexao;
 	private Lista<Parceiro> usuarios;
 	private Lista<Musica> musicas;
-//	private HashMap<String, Parceiro> usuarios;
 
 	public SupervisoraDeConexao(Socket conexao, Lista<Parceiro> usuarios) throws Exception {
 		System.out.println("SUPERVISORA");

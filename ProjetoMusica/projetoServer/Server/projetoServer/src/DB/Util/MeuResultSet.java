@@ -25,7 +25,10 @@ import java.net.URL;
 
 import java.util.Calendar;
 import java.util.Map;
-
+/**
+ * Classe de comandos para manipulação da informação existentes no banco de dados.
+ *
+ */
 public class MeuResultSet implements ResultSet {
 	protected Statement comando;
 	protected ResultSet resultado;

@@ -37,22 +37,9 @@ public class Server {
 				comando = Teclado.getUmString();
 			} catch (Exception erro) {
 			}
-
-			if (comando.toLowerCase().equals("desativar")) {
-//				synchronized (usuarios) {
-//					for (Parceiro usuario : usuarios.getItem()) {
-//						try {
-//							usuario.receba(new Comunicado("FIM"));
-//							usuario.adeus();
-//						} catch (Exception erro) {
-//						}
-//					}
-//				}
-
 				System.out.println("O servidor foi desativado!\n");
 				System.exit(0);
 			} else
 				System.err.println("Comando invalido!\n");
 		}
-	}
-}
+}}
