@@ -5,11 +5,23 @@ import java.net.*;
 
 import Helper.Comunicado;
 
+/**
+ * A classe Parceiro é a classe para a criação de um parceiro para a 
+ * conexão dele com o servidor.
+ */
 public class Parceiro {
 	private Socket conexao;
 	private ObjectInputStream receptor;
 	private ObjectOutputStream transmissor;
 
+	/**
+	 * Instancia um novo parceiro para sua conexão com o servidor.
+	 *
+	 * @param conexao Socket de conexão com o servidor.
+	 * @param receptor Receptor da informação.
+	 * @param transmissor Transmissor da informação
+	 * @throws Exception Caso occora um erro ao instanciar o novo parceiro lança-se uma excessão.
+	 */
 	public Parceiro(Socket conexao, ObjectInputStream receptor, ObjectOutputStream transmissor) throws Exception //se o parrametro nulos
 	{
 		if (conexao == null)
@@ -26,6 +38,12 @@ public class Parceiro {
 		this.transmissor = transmissor;
 	}
 
+	/**
+	 * Método responsavel por fazer com que o Servidor transmita informações ao Cliente.
+	 *
+	 * @param x Comunicado a ser transmitido
+	 * @throws Exception Caso ocorra um erro ao transmitir o Comunicado lança-se uma exceção.
+	 */
 	public void receba(Comunicado x) throws Exception {
 		try {
 			this.transmissor.writeObject(x);
@@ -35,21 +53,18 @@ public class Parceiro {
 		}
 	}
 
+	/**
+	 * Método que espera o retorno do Cliente com as informações ao Servidor
+	 * 
+	 *
+	 * @return Comunicado a ser recebido pelo Servidor.
+	 * @throws Exception Em caso de erro na recepção do comunicado lança-se exceção.
+	 */
 	public Comunicado envie() throws Exception {
 		try {
 			return (Comunicado) this.receptor.readObject();
 		} catch (Exception erro) {
 			throw new Exception("Erro de recepcao");
-		}
-	}
-
-	public void adeus() throws Exception {
-		try {
-//			this.transmissor.close();
-//			this.receptor.close();
-//			this.conexao.close();
-		} catch (Exception erro) {
-			throw new Exception("Erro de desconexao");
 		}
 	}
 }

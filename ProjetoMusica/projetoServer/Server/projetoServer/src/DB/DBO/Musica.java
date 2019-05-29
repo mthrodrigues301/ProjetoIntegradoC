@@ -1,15 +1,30 @@
 package DB.DBO;
 
+/**
+ * DBO Musica é a classe responsável por manipular as informações das músicas 
+ * contidas no banco de dados.
+ *  
+ * @author Eduardo Oliveira e Matheus Andrey
+ */
 public class Musica implements Cloneable, Comparable<Musica> {
-
-	private int id, duracao;
-	private String titulo, cantor, estilo;
+	private int duracao;
+	private String titulo, artista, estilo;
 	private double preco;
 
-	public static boolean valida(String titulo, String cantor, String estilo, int duracao, double preco) {
+	/**
+	 * Método que valida se as informações da música estão dentro do padrão definido.
+	 *
+	 * @param titulo Titulo da música.
+	 * @param artista Banda/Cantor da música.
+	 * @param estilo Estilo musical.
+	 * @param duracao Duração total da música em segundos.
+	 * @param preco Preço da música em Reais.
+	 * @return true Caso as informações estejam corretas retorna Verdadeiro;
+	 */
+	public static boolean valida(String titulo, String artista, String estilo, int duracao, double preco) {
 		if (titulo == null || titulo.length() > 80)
 			return false;
-		if (cantor == null || cantor.length() > 60)
+		if (artista == null || artista.length() > 60)
 			return false;
 		if (estilo == null || estilo.length() > 30)
 			return false;
@@ -21,90 +36,146 @@ public class Musica implements Cloneable, Comparable<Musica> {
 		return true;
 	}
 
-	public Musica(String titulo, String cantor, String estilo, int duracao, double preco) throws Exception {
-		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
+	/**
+	 * Método que instancia uma nova música caso a mesma possua dados validos.
+	 *
+	 * @param titulo Titulo da música.
+	 * @param artista Banda/Cantor(a) da música.
+	 * @param estilo Estilo da música.
+	 * @param duracao Duração total da música em segundos.
+	 * @param preco Preço da musica em Reais.
+	 * @throws Exception Em caso de erro na validação dos dados lança uma exceção.
+	 */
+	public Musica(String titulo, String artista, String estilo, int duracao, double preco) throws Exception {
+		if (!Musica.valida(titulo, artista, estilo, duracao, preco))
 			throw new Exception("Musica Invalida!");
 
 		this.duracao = duracao;
 		this.titulo = titulo;
-		this.cantor = cantor;
+		this.artista = artista;
 		this.estilo = estilo;
 		this.preco = preco;
 	}
 
-	public int getId() {
-		return id;
-	}
-
-	public void setId(int id) throws Exception {
-		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
-			throw new Exception("ID Invalido!");
-		this.id = id;
-	}
-
+	/**
+	 * Método que busca o titulo de determinada música.
+	 *
+	 * @return Titulo da musica.
+	 */
 	public String getTitulo() {
 		return titulo;
 	}
 
+	/**
+	 * Método que define um novo titulo para determinada música.
+	 *
+	 * @param titulo Titulo da música que será definido.
+	 * @throws Exception Caso o novo titulo da música seja inválido lança uma exceção.
+	 */
 	public void setTitulo(String titulo) throws Exception {
-		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
-			throw new Exception("Titulo Invalido!");
+		if (!Musica.valida(titulo, artista, estilo, duracao, preco))
+			throw new Exception("Titulo inválido!");
 		this.titulo = titulo;
 	}
 
-	public String getCantor() {
-		return cantor;
+	/**
+	 * Método que busca o nome da banda/cantor(a) de determinada música.
+	 *
+	 * @return Nome da Banda/Cantor da música.
+	 */
+	public String getArtista() {
+		return artista;
 	}
 
-	public void setCantor(String cantor) throws Exception {
-		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
-			throw new Exception("cantor Invalido!");
-		this.cantor = cantor;
+	/**
+	 * Método que define um novo cantor(a)/banda para determinada música.
+	 *
+	 * @param artista Nome da banda/cantor(a) que será definida.
+	 * @throws Exception Caso o nome da nova banda/cantor da música seja inválido lança uma exceção.
+	 */
+	public void setArtista(String artista) throws Exception {
+		if (!Musica.valida(titulo, artista, estilo, duracao, preco))
+			throw new Exception("Artista inválido!");
+		this.artista = artista;
 	}
 
+	/**
+	 * Método que busca o estilo musical de determinada música.
+	 *
+	 * @return Estilo musical.
+	 */
 	public String getEstilo() {
 		return estilo;
 	}
 
+	/**
+	 * Método que define um novo estilo musical para determinada música.
+	 *
+	 * @param estilo Estilo musical que será definido.
+	 * @throws Exception Caso o novo estilo musical não seja válido lança uma exceção.
+	 */
 	public void setEstilo(String estilo) throws Exception {
-		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
-			throw new Exception("Estilo Invalido");
+		if (!Musica.valida(titulo, artista, estilo, duracao, preco))
+			throw new Exception("Estilo inválido");
 		this.estilo = estilo;
 	}
 
+	/**
+	 * Método que busca o tempo de duração de determinada música.
+	 *
+	 * @return o tempo de duração da música.
+	 */
 	public int getDuracao() {
 		return duracao;
 	}
 
+	/**
+	 * Método que define uma nova duração para determinada música.
+	 *
+	 * @param duracao Tempo de duração da musica que será definido.
+	 * @throws Exception Caso o novo tempo de duração da música esteja errado lança uma exceção.
+	 */
 	public void setDuracao(int duracao) throws Exception {
-		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
-			throw new Exception("Duracao Invalida");
+		if (!Musica.valida(titulo, artista, estilo, duracao, preco))
+			throw new Exception("Duracao Inválida");
 		this.duracao = duracao;
 	}
 
+	/**
+	 * Método que busca o preço de determinada música.
+	 *
+	 * @return Preço da música.
+	 */
 	public double getPreco() {
 		return preco;
 	}
 
+	/**
+	 * Método que define um novo preço para determinada música.
+	 *
+	 * @param preco Preço da música a ser definido.
+	 * @throws Exception Caso o novo preço da música seja inválido lança uma excessão.
+	 */
 	public void setPreco(double preco) throws Exception {
-		if (!Musica.valida(titulo, cantor, estilo, duracao, preco))
-			throw new Exception("Preco Invalido!");
+		if (!Musica.valida(titulo, artista, estilo, duracao, preco))
+			throw new Exception("Preco Inválido!");
 		this.preco = preco;
 	}
-
+	/**
+	 * Método que passa as informações da música para formato de texto.
+	 * 
+	 * @return Retorna as informações da música em formato de texto.
+	 */
 	public String toString() {
-		int duracao = this.duracao / 60;
-		int minutos = 0, segundos = 0;
-		if (duracao > 1) {
-			segundos = this.duracao % 60;
-		} else {
-			segundos = duracao;
-		}
-
-		return "Musica: " + this.titulo + "\ncantor: " + this.cantor + "\nEstilo: " + this.estilo
-				+ "\nDuração: " + minutos + ":" + segundos + "\nPreço R$: " + this.preco;
+		return (this.duracao / 60 < 10 ? "0" : "") + this.duracao / 60 + ":" + (this.duracao % 60 < 10 ? "0" : "")
+				+ this.duracao % 60 + " " + this.titulo + " - " + this.artista + " - " + this.estilo + "   R$: "
+				+ this.preco;
 	}
-
+	/**
+	 * Método que compara a igualdade da música atual com outra música.
+	 * 
+	 * @return true Caso ambos Objetos sejam iguais retorna Verdadeiro
+	 */
 	public boolean equals(Object obj) {
 		if (this == obj)
 			return true;
@@ -115,11 +186,9 @@ public class Musica implements Cloneable, Comparable<Musica> {
 
 		Musica musica = (Musica) obj;
 
-		if (this.id != musica.id)
-			return false;
 		if (this.titulo != musica.titulo)
 			return false;
-		if (this.cantor != musica.cantor)
+		if (this.artista != musica.artista)
 			return false;
 		if (this.estilo != musica.estilo)
 			return false;
@@ -130,13 +199,16 @@ public class Musica implements Cloneable, Comparable<Musica> {
 
 		return true;
 	}
-
+	/**
+	 * Método que gera um valor hash code para determinada música.
+	 * 
+	 * @return Retorna um valor hash code de determinada música.
+	 */
 	public int hashCode() {
 		int ret = 999;
 
-		ret = ret * 5 + new Integer(this.id).hashCode();
 		ret = ret * 5 + new Integer(this.titulo).hashCode();
-		ret = ret * 5 + new Integer(this.cantor).hashCode();
+		ret = ret * 5 + new Integer(this.artista).hashCode();
 		ret = ret * 5 + new Integer(this.estilo).hashCode();
 		ret = ret * 5 + new Integer(this.duracao).hashCode();
 		ret = ret * 5 + new Integer((int) this.preco).hashCode();
@@ -144,18 +216,27 @@ public class Musica implements Cloneable, Comparable<Musica> {
 		return ret;
 	}
 
+	/**
+	 * Método que clona uma música ja existente.
+	 *
+	 * @param modelo Molde com parametros de uma musica ja existente.
+	 * @throws Exception caso os dados da musica molde estejam incorretos lança uma exceção. 
+	 */
 	public Musica(Musica modelo) throws Exception {
 		if (modelo == null)
-			throw new Exception("Modelo Invalido!");
+			throw new Exception("Modelo Inválido!");
 
-		this.id = modelo.id;
 		this.titulo = modelo.titulo;
-		this.cantor = modelo.cantor;
+		this.artista = modelo.artista;
 		this.estilo = modelo.estilo;
 		this.duracao = modelo.duracao;
 		this.preco = modelo.preco;
 	}
-
+	/**
+	 * Método que copia e gera uma música igual a outra já existente.
+	 * 
+	 * @return Retorna uma música igual a outra já existente.
+	 */
 	public Object clone() {
 		Musica ret = null;
 		try {
@@ -164,19 +245,19 @@ public class Musica implements Cloneable, Comparable<Musica> {
 		}
 		return ret;
 	}
-
+	/**
+	 * Método que compara a música atual com outra para ver se ambas coincidem.
+	 * 
+	 * @return Retorna 0 caso as músicas sejam iguais.
+	 */
 	public int compareTo(Musica musica) {
-		if (this.id < musica.id)
-			return -999;
-		if (this.id > musica.id)
-			return 999;
 		if (this.titulo.length() < musica.titulo.length())
 			return -999;
 		if (this.titulo.length() > musica.titulo.length())
 			return 999;
-		if (this.cantor.length() < musica.cantor.length())
+		if (this.artista.length() < musica.artista.length())
 			return -999;
-		if (this.cantor.length() > musica.cantor.length())
+		if (this.artista.length() > musica.artista.length())
 			return 999;
 		if (this.estilo.length() < musica.estilo.length())
 			return -999;

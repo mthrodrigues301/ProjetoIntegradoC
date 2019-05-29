@@ -26,7 +26,6 @@ import javax.swing.SwingConstants;
 import javax.swing.JLayeredPane;
 
 public class JanelaDeMusicas extends JFrame {
-
 	private JPanel contentPane;
 	private JTextField txtPesquisa;
 	private Parceiro servidor;
@@ -37,8 +36,7 @@ public class JanelaDeMusicas extends JFrame {
 	private JList<Musica> listCarrinho;
 	private JButton Remover;
 	private Comunicado comunicado;
-	private double precoTotal = 0;
-	private int tempoTotal = 0;
+	
 
 	// MODEL
 	private DefaultListModel<Musica> dmMusicas = new DefaultListModel<Musica>();
@@ -157,7 +155,9 @@ public class JanelaDeMusicas extends JFrame {
 		JButton btnFinalizarCompra = new JButton("Finalizar Compra");
 		btnFinalizarCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				double desconto = 0;
+				double desconto = 0, precoTotal = 0;
+				int tempoTotal = 0;
+				
 				if (dmCarrinho.isEmpty()) {
 					JOptionPane.showMessageDialog(null/* sem janela mãe */, null, "Erro!", JOptionPane.ERROR_MESSAGE);
 				} 
@@ -264,7 +264,7 @@ public class JanelaDeMusicas extends JFrame {
 
 		this.setVisible(true);
 	}
-
+	
 	private void LoadList() {
 		try {
 			if (!this.musicas.isVazia()) {

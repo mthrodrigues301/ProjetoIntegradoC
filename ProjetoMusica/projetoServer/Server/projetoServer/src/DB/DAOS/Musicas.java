@@ -8,8 +8,8 @@ import DB.Config.*;
 import DB.DBO.Musica;
 
 /**
- * A Classe DAO Musicas é uma classe que faz as determinadas buscas no banco,
- *  de acordo com as requisições do usuario.
+ * DAO Musicas é a classe que faz as determinadas buscas no banco,
+ *  de acordo com as requisições do usuário.
  *  
  *  @author Eduardo Oliveira e Matheus Andrey.
  */
