@@ -21,7 +21,9 @@ import java.sql.SQLXML;
 import java.sql.Statement;
 import java.sql.Time;
 import java.sql.Timestamp;
-
+/**
+ * Classe de comandos para manipulação da informação existentes no banco de dados.
+ */
 public class MeuPreparedStatement extends MeuStatement implements PreparedStatement {
 	protected PreparedStatement comando = null;
 

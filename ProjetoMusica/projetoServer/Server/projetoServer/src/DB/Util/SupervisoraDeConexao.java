@@ -8,12 +8,24 @@ import java.util.*;
 import DB.DBO.Musica;
 import Helper.Comunicado;
 
+/**
+ * A classe SupervisoraDeConexao é a classe que manipula as informações fazendo a 
+ * comunicação do cliente com o servidor.
+ */
 public class SupervisoraDeConexao extends Thread {
 	private Parceiro usuario;
 	private Socket conexao;
 	private Lista<Parceiro> usuarios;
 	private Lista<Musica> musicas;
 
+	/**
+	 * Cria uma nova supervisora de conexão para comunicar o Cliente com o 
+	 * Servidor e enviar os devidos comandos.
+	 *
+	 * @param conexao Socket de conexão com o servidor.
+	 * @param usuarios Parceiro que vai se comunicar com o servidor.
+	 * @throws Exception Caso ocorra um erro criar uma nova supervisora lança-se uma exceção. 
+	 */
 	public SupervisoraDeConexao(Socket conexao, Lista<Parceiro> usuarios) throws Exception {
 		System.out.println("SUPERVISORA");
 		if (conexao == null)
@@ -27,6 +39,9 @@ public class SupervisoraDeConexao extends Thread {
 		System.out.println("SupervisoraDeConexao " + conexao + usuarios);
 	}
 
+	/**
+	 * Método que passa as requisições do usuário para o servidor por meio de comunicados.
+	 */
 	public void run() {
 		System.out.println(" RUN SupervisoraDeConexao " + conexao + usuarios);
 		ObjectInputStream receptor = null;
@@ -98,9 +113,6 @@ public class SupervisoraDeConexao extends Thread {
 					this.usuario.receba(new Comunicado("ERR"));
 			}
 		} catch (Exception erro) {
-//			if (this.usuarios.get(this.nick) != null)
-//				this.usuarios.remove(this.nick);
-
 			try {
 				transmissor.close();
 				receptor.close();

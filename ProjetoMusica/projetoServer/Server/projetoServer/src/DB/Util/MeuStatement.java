@@ -9,7 +9,6 @@ import java.sql.SQLWarning;
 import java.sql.Statement;
 /**
  * Classe de comandos para manipulação da informação existentes no banco de dados.
- *
  */
 public class MeuStatement implements Statement {
 	protected Connection conexao = null;
