@@ -26,6 +26,7 @@ import javax.swing.SwingConstants;
 import javax.swing.JLayeredPane;
 
 public class JanelaDeMusicas extends JFrame {
+
 	private JPanel contentPane;
 	private JTextField txtPesquisa;
 	private Parceiro servidor;
@@ -36,17 +37,19 @@ public class JanelaDeMusicas extends JFrame {
 	private JList<Musica> listCarrinho;
 	private JButton Remover;
 	private Comunicado comunicado;
-	
+	private JScrollPane scrollPane;
+	private JScrollPane scrollPane_1;
+	private int precoTotal = 0;
+	private int tempoTotal = 0;
 
 	// MODEL
 	private DefaultListModel<Musica> dmMusicas = new DefaultListModel<Musica>();
 	private DefaultListModel<Musica> dmCarrinho = new DefaultListModel<Musica>();
-	private JScrollPane scrollPane;
-	private JScrollPane scrollPane_1;
+	private JButton btnLimparCarrinho;
 
 	public JanelaDeMusicas(Parceiro servidor) throws Exception {
 		if (servidor == null) {
-			JOptionPane.showMessageDialog(null/* sem janela mãe */, "Tente novamente mais tarde!",
+			JOptionPane.showMessageDialog(null/* sem janela mÃ£e */, "Tente novamente mais tarde!",
 					"Servidor indisponivel", JOptionPane.ERROR_MESSAGE);
 			return;
 		}
@@ -84,7 +87,7 @@ public class JanelaDeMusicas extends JFrame {
 					this.cmbCategoria.addItem(estilo);
 			}
 		} catch (Exception erro) {
-			JOptionPane.showMessageDialog(null/* sem janela mãe */, "Tente novamente mais tarde!",
+			JOptionPane.showMessageDialog(null/* sem janela mÃ£e */, "Tente novamente mais tarde!",
 					"Erro de conectividade", JOptionPane.ERROR_MESSAGE);
 			this.setVisible(false);
 		}
@@ -123,7 +126,7 @@ public class JanelaDeMusicas extends JFrame {
 								Double.parseDouble(comunicado.getComplemento5())));
 					}
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null/* sem janela mãe */, ex.getMessage(), "Erro!",
+					JOptionPane.showMessageDialog(null/* sem janela mÃ£e */, ex.getMessage(), "Erro!",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -155,52 +158,56 @@ public class JanelaDeMusicas extends JFrame {
 		JButton btnFinalizarCompra = new JButton("Finalizar Compra");
 		btnFinalizarCompra.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				double desconto = 0, precoTotal = 0;
+				double desconto = 0;
+				double precoTotal = 0;
 				int tempoTotal = 0;
-				
+
 				if (dmCarrinho.isEmpty()) {
-					JOptionPane.showMessageDialog(null/* sem janela mãe */, null, "Erro!", JOptionPane.ERROR_MESSAGE);
-				} 
-				else {
+					JOptionPane.showMessageDialog(null/* sem janela mÃ£e */, null,
+							"Carrinho vazio! Adicione uma música para finalizar a compra", JOptionPane.ERROR_MESSAGE);
+				} else {
 					for (int i = 0; i < dmCarrinho.getSize(); i++) {
 						precoTotal += dmCarrinho.getElementAt(i).getPreco();
 						tempoTotal += dmCarrinho.getElementAt(i).getDuracao();
+						
+					}
+					for (int i = 0; i < dmCarrinho.getSize(); i++) {
 						dmCarrinho.removeElementAt(i);
 					}
-					dmCarrinho.clear();
 					
+
+					dmCarrinho.clear();
+					btnLimparCarrinho.setVisible(false);
+
 					if (tempoTotal >= 1800 && tempoTotal < 3600) {
 						String preco = String.format("%.2f", precoTotal);
 						desconto = precoTotal * 0.9;
 						String resultado = String.format("%.2f", desconto);
-						JOptionPane.showMessageDialog(null, "Preço total: R$" + preco + "\nDesconto: 10%"
-								+ "\nPreço com Desconto: R$" + resultado);
-					}
-					else if (tempoTotal >= 3600 && tempoTotal < 5400) {
+						JOptionPane.showMessageDialog(null,
+								"Preco total: R$" + preco + "\nDesconto: 10%" + "\nPreco com Desconto: R$" + resultado);
+					} else if (tempoTotal >= 3600 && tempoTotal < 5400) {
 						String preco = String.format("%.2f", precoTotal);
 						desconto = precoTotal * 0.8;
 						String resultado = String.format("%.2f", desconto);
-						JOptionPane.showMessageDialog(null, "Preço total: R$" + preco + "\nDesconto: 20%"
-								+ "\nPreço com Desconto: R$" + resultado);
-					}
-					else if (tempoTotal > 5400) {
+						JOptionPane.showMessageDialog(null,
+								"Preco total: R$" + preco + "\nDesconto: 20%" + "\nPreco com Desconto: R$" + resultado);
+					} else if (tempoTotal > 5400) {
 						String preco = String.format("%.2f", precoTotal);
 						desconto = precoTotal * 0.7;
 						String resultado = String.format("%.2f", desconto);
-						JOptionPane.showMessageDialog(null, "Preço total: R$" + preco + "\nDesconto: 30%"
-								+ "\nPreço com Desconto: R$" + resultado);
-					} 
-					else {
+						JOptionPane.showMessageDialog(null,
+								"Preco total: R$" + preco + "\nDesconto: 30%" + "\nPreco com Desconto: R$" + resultado);
+					} else {
 						String preco = String.format("%.2f", precoTotal);
-						JOptionPane.showMessageDialog(null, "Preço total: R$" + preco);
+						JOptionPane.showMessageDialog(null, "Preco total: R$" + preco);
 					}
+
 					desconto = 0;
-					precoTotal = 0;
-					tempoTotal = 0;
+					
 				}
 			}
 		});
-		btnFinalizarCompra.setBounds(482, 366, 176, 23);
+		btnFinalizarCompra.setBounds(394, 366, 264, 23);
 		contentPane.add(btnFinalizarCompra);
 
 		JButton btnAdicionar = new JButton("Adicionar");
@@ -208,15 +215,16 @@ public class JanelaDeMusicas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					if (listMusicas == null)
-						throw new Exception("Sem itens na lista de Musicas, faça uma pesquisa!");
+						throw new Exception("Sem itens na lista de Musicas, faca uma pesquisa!");
 
 					if (listMusicas.getSelectedValue() == null)
 						throw new Exception("Selecione uma musica para adicionar ao carrinho!");
 
 					dmCarrinho.addElement(listMusicas.getSelectedValue());
 					listCarrinho.setModel(dmCarrinho);
+					btnLimparCarrinho.setVisible(true);
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null/* sem janela mãe */, ex.getMessage(), "Erro!",
+					JOptionPane.showMessageDialog(null/* sem janela mÃ£e */, ex.getMessage(), "Erro!",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -246,12 +254,16 @@ public class JanelaDeMusicas extends JFrame {
 
 					int index = listCarrinho.getSelectedIndex();
 
-					if (index < 0)
+					if (index < 0) {
 						throw new Exception("Selecione uma musica para remover do Carrinho!");
+					}
 
 					dmCarrinho.removeElementAt(index);
+					if (dmCarrinho.isEmpty()) {
+						btnLimparCarrinho.setVisible(false);
+					}
 				} catch (Exception ex) {
-					JOptionPane.showMessageDialog(null/* sem janela mãe */, ex.getMessage(), "Erro!",
+					JOptionPane.showMessageDialog(null/* sem janela mÃ£e */, ex.getMessage(), "Erro!",
 							JOptionPane.ERROR_MESSAGE);
 				}
 			}
@@ -260,11 +272,22 @@ public class JanelaDeMusicas extends JFrame {
 		Remover.setBounds(286, 243, 98, 38);
 		contentPane.add(Remover);
 
+		btnLimparCarrinho = new JButton("Limpar Carrinho");
+		btnLimparCarrinho.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dmCarrinho.clear();
+				btnLimparCarrinho.setVisible(false);
+			}
+		});
+		btnLimparCarrinho.setBounds(528, 83, 130, 23);
+		contentPane.add(btnLimparCarrinho);
+		btnLimparCarrinho.setVisible(false);
+
 		this.setLocationRelativeTo(null);
 
 		this.setVisible(true);
 	}
-	
+
 	private void LoadList() {
 		try {
 			if (!this.musicas.isVazia()) {
@@ -278,8 +301,9 @@ public class JanelaDeMusicas extends JFrame {
 				this.listMusicas.setModel(this.dmMusicas);
 			}
 		} catch (Exception ex) {
-			JOptionPane.showMessageDialog(null/* sem janela mãe */, ex.getMessage(), "Erro!",
+			JOptionPane.showMessageDialog(null/* sem janela mÃ£e */, ex.getMessage(), "Erro!",
 					JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
+
